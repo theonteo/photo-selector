@@ -51,6 +51,7 @@ private:
 
     //folder buttons
     QGroupBox* AddFolderButtons();
+    QGroupBox* AddImageSelector();
     QWidget* centralWidget;
 
 
