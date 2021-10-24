@@ -17,6 +17,7 @@ class QLabel;
 class QMenu;
 class QScrollArea;
 class QScrollBar;
+class QGroupBox;
 QT_END_NAMESPACE
 
 //! [0]
@@ -47,6 +48,14 @@ private:
     void setImage(const QImage &newImage);
     void scaleImage(double factor);
     void adjustScrollBar(QScrollBar *scrollBar, double factor);
+
+    //folder buttons
+    QGroupBox* AddFolderButtons();
+    QWidget* centralWidget;
+
+
+    void AddAllWidgets(QMainWindow* window);
+
 
     QImage image;
     QLabel *imageLabel;
