@@ -18,7 +18,7 @@
 #include <QScrollBar>
 #include <QStandardPaths>
 #include <QStatusBar>
-
+#include <QtWidgets/QStackedWidget>
 #include <QGroupBox>
 #include <QPushButton>
 #include <QCheckBox>
@@ -165,26 +165,27 @@ QGroupBox* ImageViewer::AddFolderButtons()
 }
 void ImageViewer::AddAllWidgets(QMainWindow* window)
 {
+	//QStackedWidget* stackedWidget;
 	centralWidget = new QWidget(window);
 	centralWidget->setObjectName(QString::fromUtf8("centralwidget"));
 
 	QGridLayout* grid = new QGridLayout(centralWidget);
-	grid->addWidget(AddFolderButtons(), 0, 0);
+	
+	grid->addWidget(AddFolderButtons(), 0, 0,1,1);
 
-	imageLabel = new QLabel(centralWidget);
-	scrollArea = new QScrollArea;
+	imageLabel = new QLabel;
+	scrollArea = new QScrollArea(imageLabel);
 
-	imageLabel->setBackgroundRole(QPalette::Base);
+	grid->addWidget(scrollArea,1,0,1,1);
+
+
+	//imageLabel->setBackgroundRole(QPalette::Base);
 	//imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-	imageLabel->setScaledContents(true);
+	//imageLabel->setScaledContents(true);
 
 	scrollArea->setBackgroundRole(QPalette::Base);
 	scrollArea->setWidget(imageLabel);
 	scrollArea->setVisible(true);
-
-
-
-	//setCentralWidget(scrollArea);
 
 }
 void ImageViewer::open()

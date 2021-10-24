@@ -2,6 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtLastBackgroundBuild>2021-10-24T12:38:59.8926484Z</QtLastBackgroundBuild>
+    <QtLastBackgroundBuild>2021-10-24T13:52:07.2543709Z</QtLastBackgroundBuild>
   </PropertyGroup>
 </Project>
