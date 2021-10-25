@@ -184,43 +184,20 @@ QGroupBox* ImageViewer::AddFolderButtons()
 }
 QGroupBox* ImageViewer::AddImageSelector()
 {
-	QGroupBox* groupBox = new QGroupBox(tr("Non-Exclusive Checkboxes"));
+	QGroupBox* groupBox = new QGroupBox(tr("Image Selector"));
 	groupBox->setFlat(true);
-	//! [7]
 
-	//! [8]
-	QCheckBox* checkBox1 = new QCheckBox(tr("&Checkbox 1"));
-	QCheckBox* checkBox2 = new QCheckBox(tr("C&heckbox 2"));
-	checkBox2->setChecked(true);
-	QCheckBox* tristateBox = new QCheckBox(tr("Tri-&state button"));
-	tristateBox->setTristate(true);
-	//! [8]
-	tristateBox->setCheckState(Qt::PartiallyChecked);
-
-
-	QLineEdit* inputFolder = new QLineEdit(tr("&Input Folder"));
-	QLineEdit* outputFolder = new QLineEdit(tr("&	Output Folder"));
-
-
-	QLabel* labelInput = new QLabel;
-	labelInput->setText("Input Folder");
-
-	QLabel* labelOutput = new QLabel;
-	labelOutput->setText("Output Folder");
-
-	inputFolder->setText(tr("InputFolder"));
-	outputFolder->setText(tr("OutputFolder"));
 
 
 	//! [9]
 	QVBoxLayout* vbox = new QVBoxLayout;
-	vbox->addWidget(checkBox1);
-	vbox->addWidget(checkBox2);
-	vbox->addWidget(tristateBox);
-	vbox->addWidget(labelInput);
-	vbox->addWidget(inputFolder);
-	vbox->addWidget(labelOutput);
-	vbox->addWidget(outputFolder);
+
+	for (size_t i = 0; i < 10; ++i)
+	{
+		QCheckBox* checkBox = new QCheckBox(tr("&Checkbox"));
+		vbox->addWidget(checkBox);
+	}
+
 	vbox->addStretch(1);
 	groupBox->setLayout(vbox);
 
@@ -233,14 +210,14 @@ void ImageViewer::AddAllWidgets(QMainWindow* window)
 	QGridLayout* grid = new QGridLayout(centralWidget);
 
 	grid->addWidget(AddFolderButtons(), 0, 0,1,1);
+	grid->addWidget(AddImageSelector(), 0, 1, 1, 1);
 	QLabel* selector = new QLabel;
 	selector->setText("Selector");
 
 	imageLabel = new QLabel;
 	scrollArea = new QScrollArea(imageLabel);
 	grid->addWidget(scrollArea, 1, 0, 1, 1);
-	grid->addWidget(scrollArea, 1, 0, 1, 1);
-	grid->addWidget(selector, 0, 1, 1, 1);
+
 	//imageLabel->setBackgroundRole(QPalette::Base);
 	//imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 	//imageLabel->setScaledContents(true);
