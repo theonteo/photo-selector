@@ -2,7 +2,6 @@
 #define IMAGEVIEWER_H
 
 #include <QMainWindow>
-#include <QImage>
 #if defined(QT_PRINTSUPPORT_LIB)
 #  include <QtPrintSupport/qtprintsupportglobal.h>
 
@@ -35,19 +34,13 @@ private slots:
     void print();
     void copy();
     void paste();
-    void zoomIn();
-    void zoomOut();
-    void normalSize();
-    void fitToWindow();
     void about();
 
 private:
     void createActions();
     void updateActions();
     bool saveFile(const QString &fileName);
-    void setImage(const QImage &newImage);
-    void scaleImage(double factor);
-    void adjustScrollBar(QScrollBar *scrollBar, double factor);
+ 
 
     //folder buttons
     QGroupBox* AddFolderButtons();
@@ -56,12 +49,6 @@ private:
 
 
     void AddAllWidgets(QMainWindow* window);
-
-
-    QImage image;
-    QLabel *imageLabel;
-    QScrollArea *scrollArea;
-    double scaleFactor = 1;
 
 #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printer)
     QPrinter printer;

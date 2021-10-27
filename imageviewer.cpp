@@ -15,7 +15,6 @@
 #include <QPainter>
 #include <QScreen>
 #include <QScrollArea>
-#include <QScrollBar>
 #include <QStandardPaths>
 #include <QStatusBar>
 #include <QtWidgets/QStackedWidget>
@@ -76,25 +75,6 @@ bool ImageViewer::loadFile(const QString& fileName)
 	statusBar()->showMessage(message);
 	return true;
 }
-
-void ImageViewer::setImage(const QImage& newImage)
-{
-	image = newImage;
-	if (image.colorSpace().isValid())
-		image.convertToColorSpace(QColorSpace::SRgb);
-	imageLabel->setPixmap(QPixmap::fromImage(image));
-	//! [4]
-	scaleFactor = 1.0;
-
-	scrollArea->setVisible(true);
-	printAct->setEnabled(true);
-	fitToWindowAct->setEnabled(true);
-	updateActions();
-
-	if (!fitToWindowAct->isChecked())
-		imageLabel->adjustSize();
-}
-
 //! [4]
 
 bool ImageViewer::saveFile(const QString& fileName)
@@ -305,51 +285,13 @@ void ImageViewer::paste()
 #endif // !QT_NO_CLIPBOARD
 }
 
-//! [9]
-void ImageViewer::zoomIn()
-//! [9] //! [10]
-{
-	scaleImage(1.25);
-}
 
-void ImageViewer::zoomOut()
-{
-	scaleImage(0.8);
-}
-
-//! [10] //! [11]
-void ImageViewer::normalSize()
-//! [11] //! [12]
-{
-	imageLabel->adjustSize();
-	scaleFactor = 1.0;
-}
-//! [12]
-
-//! [13]
-void ImageViewer::fitToWindow()
-//! [13] //! [14]
-{
-	bool fitToWindow = fitToWindowAct->isChecked();
-	scrollArea->setWidgetResizable(fitToWindow);
-	if (!fitToWindow)
-		normalSize();
-	updateActions();
-}
-//! [14]
-
-
-//! [15]
 void ImageViewer::about()
-//! [15] //! [16]
 {
 
 }
-//! [16]
 
-//! [17]
 void ImageViewer::createActions()
-//! [17] //! [18]
 {
 	QMenu* fileMenu = menuBar()->addMenu(tr("&File"));
 
@@ -405,11 +347,8 @@ void ImageViewer::createActions()
 
 
 }
-//! [18]
 
-//! [21]
 void ImageViewer::updateActions()
-//! [21] //! [22]
 {
 	saveAsAct->setEnabled(!image.isNull());
 	copyAct->setEnabled(!image.isNull());
@@ -417,28 +356,3 @@ void ImageViewer::updateActions()
 	zoomOutAct->setEnabled(!fitToWindowAct->isChecked());
 	normalSizeAct->setEnabled(!fitToWindowAct->isChecked());
 }
-//! [22]
-
-//! [23]
-void ImageViewer::scaleImage(double factor)
-//! [23] //! [24]
-{
-	scaleFactor *= factor;
-	imageLabel->resize(scaleFactor * imageLabel->pixmap(Qt::ReturnByValue).size());
-
-	adjustScrollBar(scrollArea->horizontalScrollBar(), factor);
-	adjustScrollBar(scrollArea->verticalScrollBar(), factor);
-
-	zoomInAct->setEnabled(scaleFactor < 3.0);
-	zoomOutAct->setEnabled(scaleFactor > 0.333);
-}
-//! [24]
-
-//! [25]
-void ImageViewer::adjustScrollBar(QScrollBar* scrollBar, double factor)
-//! [25] //! [26]
-{
-	scrollBar->setValue(int(factor * scrollBar->value()
-		+ ((factor - 1) * scrollBar->pageStep() / 2)));
-}
-//! [26]
