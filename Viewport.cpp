@@ -4,6 +4,16 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <QColorSpace>
+#include <QMenu>
+#include <QObject>
+
+Viewport::Viewport()
+{
+	imageLabel = new QLabel;
+	scrollArea = new QScrollArea(imageLabel);
+	
+}
+
 
 void Viewport::adjustScrollBar(QScrollBar* scrollBar, double factor)
 {
@@ -11,6 +21,18 @@ void Viewport::adjustScrollBar(QScrollBar* scrollBar, double factor)
 		+ ((factor - 1) * scrollBar->pageStep() / 2)));
 }
 
+void Viewport::CreateViewportWidget()
+{
+	scrollArea->setBackgroundRole(QPalette::Base);
+	scrollArea->setWidget(imageLabel);
+	scrollArea->setVisible(true);
+
+
+}
+QWidget* Viewport::GetViewportWidget() const
+{
+	return widget;
+}
 const QLabel* Viewport::GetImageLabel() const
 {
 	return imageLabel;
@@ -31,11 +53,11 @@ void Viewport::setImage(const QImage& newImage)
 	scaleFactor = 1.0;
 
 	scrollArea->setVisible(true);
-	printAct->setEnabled(true);
-	fitToWindowAct->setEnabled(true);
-	updateActions();
+	//printAct->setEnabled(true);
+	//fitToWindowAct->setEnabled(true);
+	//updateActions();
 
-	if (!fitToWindowAct->isChecked())
+//	if (!fitToWindowAct->isChecked())
 		imageLabel->adjustSize();
 }
 
@@ -57,11 +79,22 @@ void Viewport::normalSize()
 
 void Viewport::fitToWindow()
 {
-	bool fitToWindow = fitToWindowAct->isChecked();
-	scrollArea->setWidgetResizable(fitToWindow);
-	if (!fitToWindow)
+	//bool fitToWindow = fitToWindowAct->isChecked();
+//	scrollArea->setWidgetResizable(fitToWindow);
+//	if (!fitToWindow)
 		normalSize();
-	updateActions();
+//	updateActions();
+}
+
+void Viewport::AddActions(QMenu* menu)
+{
+
+	zoomInAct = menu->addAction(tr("Zoom &In (25%)"), this, &Viewport::zoomIn);
+	zoomInAct->setShortcut(QKeySequence::ZoomIn);
+	zoomInAct->setEnabled(false);
+
+
+
 }
 
 
@@ -73,6 +106,6 @@ void Viewport::scaleImage(double factor)
 	adjustScrollBar(scrollArea->horizontalScrollBar(), factor);
 	adjustScrollBar(scrollArea->verticalScrollBar(), factor);
 
-	zoomInAct->setEnabled(scaleFactor < 3.0);
-	zoomOutAct->setEnabled(scaleFactor > 0.333);
+//	zoomInAct->setEnabled(scaleFactor < 3.0);
+//	zoomOutAct->setEnabled(scaleFactor > 0.333);
 }

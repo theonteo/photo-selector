@@ -1,6 +1,8 @@
 #ifndef IMAGEVIEWER_H
 #define IMAGEVIEWER_H
 
+#include "Viewport.h"
+
 #include <QMainWindow>
 #if defined(QT_PRINTSUPPORT_LIB)
 #  include <QtPrintSupport/qtprintsupportglobal.h>
@@ -10,7 +12,7 @@
 #  endif
 #endif
 
-class Viewport;
+
 QT_BEGIN_NAMESPACE
 class QAction;
 class QLabel;
@@ -61,10 +63,6 @@ private:
     QAction *saveAsAct;
     QAction *printAct;
     QAction *copyAct;
-    QAction *zoomInAct;
-    QAction *zoomOutAct;
-    QAction *normalSizeAct;
-    QAction *fitToWindowAct;
 };
 //! [0]
 

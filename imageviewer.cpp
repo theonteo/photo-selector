@@ -6,6 +6,7 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QImageReader>
+#include <QColorSpace>
 #include <QImageWriter>
 #include <QLabel>
 #include <QMenuBar>
@@ -65,8 +66,11 @@ bool ImageViewer::loadFile(const QString& fileName)
 	//! [2]
 
 	viewport.setImage(newImage);
-
+	updateActions();
 	setWindowFilePath(fileName);
+
+
+	const auto& image = viewport.GetImage();
 
 	const QString description = image.colorSpace().isValid()
 		? image.colorSpace().description() : tr("unknown");
@@ -81,6 +85,11 @@ bool ImageViewer::loadFile(const QString& fileName)
 bool ImageViewer::saveFile(const QString& fileName)
 {
 	QImageWriter writer(fileName);
+
+	const auto& image = viewport.GetImage();
+
+
+
 
 	if (!writer.write(image)) {
 		QMessageBox::information(this, QGuiApplication::applicationDisplayName(),
@@ -192,19 +201,8 @@ void ImageViewer::AddAllWidgets(QMainWindow* window)
 
 	grid->addWidget(AddFolderButtons(), 0, 0,1,1);
 	grid->addWidget(AddImageSelector(), 0, 1, 1, 1);
-	QLabel* selector = new QLabel;
-	selector->setText("Selector");
-
-	grid->addWidget(scrollArea, 1, 0, 1, 1);
-
-	//imageLabel->setBackgroundRole(QPalette::Base);
-	//imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-	//imageLabel->setScaledContents(true);
-
-	scrollArea->setBackgroundRole(QPalette::Base);
-	scrollArea->setWidget(imageLabel);
-	scrollArea->setVisible(true);
-
+	grid->addWidget(viewport.GetViewportWidget(), 1, 0, 1, 1);
+	viewport.CreateViewportWidget();
 }
 void ImageViewer::open()
 {
@@ -283,6 +281,7 @@ void ImageViewer::paste()
 
 
 		viewport.setImage(newImage);
+		updateActions();
 		setWindowFilePath(QString());
 		const QString message = tr("Obtained image from clipboard, %1x%2, Depth: %3")
 			.arg(newImage.width()).arg(newImage.height()).arg(newImage.depth());
@@ -327,24 +326,21 @@ void ImageViewer::createActions()
 
 	QMenu* viewMenu = menuBar()->addMenu(tr("&View"));
 
-	zoomInAct = viewMenu->addAction(tr("Zoom &In (25%)"), this, &Viewport::zoomIn);
-	zoomInAct->setShortcut(QKeySequence::ZoomIn);
-	zoomInAct->setEnabled(false);
 
-	zoomOutAct = viewMenu->addAction(tr("Zoom &Out (25%)"), this, &Viewport::zoomOut);
-	zoomOutAct->setShortcut(QKeySequence::ZoomOut);
-	zoomOutAct->setEnabled(false);
+	//zoomOutAct = viewMenu->addAction(tr("Zoom &Out (25%)"), this, &Viewport::zoomOut);
+	//zoomOutAct->setShortcut(QKeySequence::ZoomOut);
+	//zoomOutAct->setEnabled(false);
 
-	normalSizeAct = viewMenu->addAction(tr("&Normal Size"), this, &Viewport::normalSize);
-	normalSizeAct->setShortcut(tr("Ctrl+S"));
-	normalSizeAct->setEnabled(false);
+	//normalSizeAct = viewMenu->addAction(tr("&Normal Size"), this, &Viewport::normalSize);
+	//normalSizeAct->setShortcut(tr("Ctrl+S"));
+	//normalSizeAct->setEnabled(false);
 
-	viewMenu->addSeparator();
+	//viewMenu->addSeparator();
 
-	fitToWindowAct = viewMenu->addAction(tr("&Fit to Window"), this, &Viewport::fitToWindow);
-	fitToWindowAct->setEnabled(false);
-	fitToWindowAct->setCheckable(true);
-	fitToWindowAct->setShortcut(tr("Ctrl+F"));
+	//fitToWindowAct = viewMenu->addAction(tr("&Fit to Window"), this, &Viewport::fitToWindow);
+	//fitToWindowAct->setEnabled(false);
+	//fitToWindowAct->setCheckable(true);
+	//fitToWindowAct->setShortcut(tr("Ctrl+F"));
 
 	QMenu* helpMenu = menuBar()->addMenu(tr("&Help"));
 
@@ -358,7 +354,7 @@ void ImageViewer::updateActions()
 
 	saveAsAct->setEnabled(!image.isNull());
 	copyAct->setEnabled(!image.isNull());
-	zoomInAct->setEnabled(!fitToWindowAct->isChecked());
-	zoomOutAct->setEnabled(!fitToWindowAct->isChecked());
-	normalSizeAct->setEnabled(!fitToWindowAct->isChecked());
+	//zoomInAct->setEnabled(!fitToWindowAct->isChecked());
+	//zoomOutAct->setEnabled(!fitToWindowAct->isChecked());
+	//normalSizeAct->setEnabled(!fitToWindowAct->isChecked());
 }

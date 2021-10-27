@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QImage>
-
+#include <QObject>
 QT_BEGIN_NAMESPACE
 class QAction;
 class QLabel;
@@ -9,23 +9,32 @@ class QMenu;
 class QScrollArea;
 class QScrollBar;
 class QGroupBox;
+class QMenu;
+class QWidget;
+class QObject;
 QT_END_NAMESPACE
 
-class Viewport
+class Viewport:public QObject
 {
-	Q_OBJECT
-
+  Q_OBJECT
 private:
 
   QImage image;
-  QLabel* imageLabel;
-  QScrollArea* scrollArea;
+  QLabel* imageLabel{ nullptr };
+  QScrollArea* scrollArea{ nullptr };
   double scaleFactor = 1;
 
-  QWidget* widget;
+  QWidget* widget{ nullptr };
 
+  QAction* zoomInAct;
+  QAction* zoomOutAct;
+  QAction* normalSizeAct;
+  QAction* fitToWindowAct;
 
 public:
+  Viewport();
+
+  void CreateViewportWidget();
 
   //get reference of image label
   const QLabel* GetImageLabel() const;
@@ -37,14 +46,21 @@ public:
   void setImage(const QImage& newImage);
   void adjustScrollBar(QScrollBar* scrollBar, double factor);
 
-  QWidget* CreateViewportWidget();
+  QWidget* GetViewportWidget() const;
 
   //scaling functions
   void scaleImage(double factor);
+private slots:
   void zoomIn();
   void zoomOut();
   void normalSize();
   void fitToWindow();
+
+  void AddActions(QMenu* menu);
+
+
+
+
 
 };
 
