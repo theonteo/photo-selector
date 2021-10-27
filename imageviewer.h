@@ -10,6 +10,7 @@
 #  endif
 #endif
 
+class Viewport;
 QT_BEGIN_NAMESPACE
 class QAction;
 class QLabel;
@@ -37,6 +38,9 @@ private slots:
     void about();
 
 private:
+
+    Viewport viewport;
+
     void createActions();
     void updateActions();
     bool saveFile(const QString &fileName);

@@ -3,7 +3,6 @@
 
 #include <QApplication>
 #include <QClipboard>
-#include <QColorSpace>
 #include <QDir>
 #include <QFileDialog>
 #include <QImageReader>
@@ -14,7 +13,6 @@
 #include <QMimeData>
 #include <QPainter>
 #include <QScreen>
-#include <QScrollArea>
 #include <QStandardPaths>
 #include <QStatusBar>
 #include <QtWidgets/QStackedWidget>
@@ -23,6 +21,9 @@
 #include <QCheckBox>
 #include <QGridLayout>
 #include <qlineedit.h>
+
+#include <Viewport.h>
+
 
 #if defined(QT_PRINTSUPPORT_LIB)
 #  include <QtPrintSupport/qtprintsupportglobal.h>
@@ -63,7 +64,7 @@ bool ImageViewer::loadFile(const QString& fileName)
 	}
 	//! [2]
 
-	setImage(newImage);
+	viewport.setImage(newImage);
 
 	setWindowFilePath(fileName);
 
@@ -194,8 +195,6 @@ void ImageViewer::AddAllWidgets(QMainWindow* window)
 	QLabel* selector = new QLabel;
 	selector->setText("Selector");
 
-	imageLabel = new QLabel;
-	scrollArea = new QScrollArea(imageLabel);
 	grid->addWidget(scrollArea, 1, 0, 1, 1);
 
 	//imageLabel->setBackgroundRole(QPalette::Base);
@@ -228,14 +227,17 @@ void ImageViewer::saveAs()
 void ImageViewer::print()
 //! [5] //! [6]
 {
-	Q_ASSERT(!imageLabel->pixmap(Qt::ReturnByValue).isNull());
+	const auto& label = viewport.GetImageLabel();
+
+
+	Q_ASSERT(!label->pixmap(Qt::ReturnByValue).isNull());
 #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printdialog)
 	//! [6] //! [7]
 	QPrintDialog dialog(&printer, this);
 	//! [7] //! [8]
 	if (dialog.exec()) {
 		QPainter painter(&printer);
-		QPixmap pixmap = imageLabel->pixmap(Qt::ReturnByValue);
+		QPixmap pixmap = label->pixmap(Qt::ReturnByValue);
 		QRect rect = painter.viewport();
 		QSize size = pixmap.size();
 		size.scale(rect.size(), Qt::KeepAspectRatio);
@@ -245,12 +247,13 @@ void ImageViewer::print()
 	}
 #endif
 }
+
 //! [8]
 
 void ImageViewer::copy()
 {
 #ifndef QT_NO_CLIPBOARD
-	QGuiApplication::clipboard()->setImage(image);
+	QGuiApplication::clipboard()->setImage(viewport.GetImage());
 #endif // !QT_NO_CLIPBOARD
 }
 
@@ -276,7 +279,10 @@ void ImageViewer::paste()
 		statusBar()->showMessage(tr("No image in clipboard"));
 	}
 	else {
-		setImage(newImage);
+
+
+
+		viewport.setImage(newImage);
 		setWindowFilePath(QString());
 		const QString message = tr("Obtained image from clipboard, %1x%2, Depth: %3")
 			.arg(newImage.width()).arg(newImage.height()).arg(newImage.depth());
@@ -321,21 +327,21 @@ void ImageViewer::createActions()
 
 	QMenu* viewMenu = menuBar()->addMenu(tr("&View"));
 
-	zoomInAct = viewMenu->addAction(tr("Zoom &In (25%)"), this, &ImageViewer::zoomIn);
+	zoomInAct = viewMenu->addAction(tr("Zoom &In (25%)"), this, &Viewport::zoomIn);
 	zoomInAct->setShortcut(QKeySequence::ZoomIn);
 	zoomInAct->setEnabled(false);
 
-	zoomOutAct = viewMenu->addAction(tr("Zoom &Out (25%)"), this, &ImageViewer::zoomOut);
+	zoomOutAct = viewMenu->addAction(tr("Zoom &Out (25%)"), this, &Viewport::zoomOut);
 	zoomOutAct->setShortcut(QKeySequence::ZoomOut);
 	zoomOutAct->setEnabled(false);
 
-	normalSizeAct = viewMenu->addAction(tr("&Normal Size"), this, &ImageViewer::normalSize);
+	normalSizeAct = viewMenu->addAction(tr("&Normal Size"), this, &Viewport::normalSize);
 	normalSizeAct->setShortcut(tr("Ctrl+S"));
 	normalSizeAct->setEnabled(false);
 
 	viewMenu->addSeparator();
 
-	fitToWindowAct = viewMenu->addAction(tr("&Fit to Window"), this, &ImageViewer::fitToWindow);
+	fitToWindowAct = viewMenu->addAction(tr("&Fit to Window"), this, &Viewport::fitToWindow);
 	fitToWindowAct->setEnabled(false);
 	fitToWindowAct->setCheckable(true);
 	fitToWindowAct->setShortcut(tr("Ctrl+F"));
@@ -344,12 +350,12 @@ void ImageViewer::createActions()
 
 	helpMenu->addAction(tr("&About"), this, &ImageViewer::about);
 	helpMenu->addAction(tr("About &Qt"), this, &QApplication::aboutQt);
-
-
 }
 
 void ImageViewer::updateActions()
 {
+	const auto& image = viewport.GetImage();
+
 	saveAsAct->setEnabled(!image.isNull());
 	copyAct->setEnabled(!image.isNull());
 	zoomInAct->setEnabled(!fitToWindowAct->isChecked());
