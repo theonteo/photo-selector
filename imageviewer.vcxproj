@@ -182,12 +182,12 @@
     </QtMoc>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="imageviewer.cpp" />
+    <ClCompile Include="PhotoSelector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="imageviewer.h">
+    <QtMoc Include="PhotoSelector.h">
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

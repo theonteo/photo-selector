@@ -22,16 +22,17 @@ class QScrollBar;
 class QGroupBox;
 QT_END_NAMESPACE
 
-//! [0]
-class ImageViewer : public QMainWindow
+namespace Photo
 {
+  class PhotoSelector : public QMainWindow
+  {
     Q_OBJECT
 
-public:
-    ImageViewer(QWidget *parent = nullptr);
-    bool loadFile(const QString &);
+  public:
+    PhotoSelector(QWidget* parent = nullptr);
+    bool loadFile(const QString&);
 
-private slots:
+  private slots:
     void open();
     void saveAs();
     void print();
@@ -39,14 +40,14 @@ private slots:
     void paste();
     void about();
 
-private:
+  private:
 
     Viewport viewport;
 
     void createActions();
     void updateActions();
-    bool saveFile(const QString &fileName);
- 
+    bool saveFile(const QString& fileName);
+
 
     //folder buttons
     QGroupBox* AddFolderButtons();
@@ -60,10 +61,10 @@ private:
     QPrinter printer;
 #endif
 
-    QAction *saveAsAct;
-    QAction *printAct;
-    QAction *copyAct;
-};
-//! [0]
+    QAction* saveAsAct;
+    QAction* printAct;
+    QAction* copyAct;
+  };
+}
 
 #endif

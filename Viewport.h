@@ -14,53 +14,58 @@ class QWidget;
 class QObject;
 QT_END_NAMESPACE
 
-class Viewport:public QObject
+namespace Photo
 {
-  Q_OBJECT
-private:
+  class Viewport :public QObject
+  {
+    Q_OBJECT
+  private:
 
-  QImage image;
-  QLabel* imageLabel{ nullptr };
-  QScrollArea* scrollArea{ nullptr };
-  double scaleFactor = 1;
+    QImage image;
+    QLabel* imageLabel{ nullptr };
+    QScrollArea* scrollArea{ nullptr };
+    double scaleFactor = 1;
 
-  QWidget* widget{ nullptr };
+    QWidget* widget{ nullptr };
 
-  QAction* zoomInAct;
-  QAction* zoomOutAct;
-  QAction* normalSizeAct;
-  QAction* fitToWindowAct;
+    QAction* zoomInAct;
+    QAction* zoomOutAct;
+    QAction* normalSizeAct;
+    QAction* fitToWindowAct;
 
-public:
-  Viewport();
+  public:
+    Viewport();
 
-  void CreateViewportWidget();
+    void CreateViewportWidget();
 
-  //get reference of image label
-  const QLabel* GetImageLabel() const;
+    //get reference of image label
+    const QLabel* GetImageLabel() const;
 
-  //get reference of image
-  const QImage& GetImage() const;
+    //get reference of image
+    const QImage& GetImage() const;
 
-  //image functions
-  void setImage(const QImage& newImage);
-  void adjustScrollBar(QScrollBar* scrollBar, double factor);
+    //image functions
+    void setImage(const QImage& newImage);
+    void adjustScrollBar(QScrollBar* scrollBar, double factor);
 
-  QWidget* GetViewportWidget() const;
-
-  //scaling functions
-  void scaleImage(double factor);
-private slots:
-  void zoomIn();
-  void zoomOut();
-  void normalSize();
-  void fitToWindow();
-
-  void AddActions(QMenu* menu);
+    QWidget* GetViewportWidget() const;
+    QWidget* GetScrollArea() const;
 
 
+    //scaling functions
+    void scaleImage(double factor);
+  private slots:
+    void zoomIn();
+    void zoomOut();
+    void normalSize();
+    void fitToWindow();
+
+    void AddActions(QMenu* menu);
 
 
 
-};
 
+
+  };
+
+}

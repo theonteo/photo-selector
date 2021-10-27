@@ -2,22 +2,22 @@
 #include <QApplication>
 #include <QCommandLineParser>
 
-#include "imageviewer.h"
+#include "PhotoSelector.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    QGuiApplication::setApplicationDisplayName(ImageViewer::tr("Image Viewer"));
+    QGuiApplication::setApplicationDisplayName(Photo::PhotoSelector::tr("Image Viewer"));
     QCommandLineParser commandLineParser;
 
     commandLineParser.addHelpOption();
-    commandLineParser.addPositionalArgument(ImageViewer::tr("[file]"), ImageViewer::tr("Image file to open."));
+    commandLineParser.addPositionalArgument(Photo::PhotoSelector::tr("[file]"), Photo::PhotoSelector::tr("Image file to open."));
     commandLineParser.process(QCoreApplication::arguments());
 
 
 
 
-    ImageViewer imageViewer;
+    Photo::PhotoSelector imageViewer;
     if (!commandLineParser.positionalArguments().isEmpty()
         && !imageViewer.loadFile(commandLineParser.positionalArguments().constFirst())) {
         return -1;

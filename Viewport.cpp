@@ -6,106 +6,122 @@
 #include <QColorSpace>
 #include <QMenu>
 #include <QObject>
-
-Viewport::Viewport()
+namespace Photo
 {
-	imageLabel = new QLabel;
-	scrollArea = new QScrollArea(imageLabel);
-	
-}
+	Viewport::Viewport()
+	{
+		imageLabel = new QLabel;
+		scrollArea = new QScrollArea(imageLabel);
+
+	}
+
+	void Viewport::adjustScrollBar(QScrollBar* scrollBar, double factor)
+	{
+		scrollBar->setValue(int(factor * scrollBar->value()
+			+ ((factor - 1) * scrollBar->pageStep() / 2)));
+	}
+
+	void Viewport::CreateViewportWidget()
+	{
+		scrollArea->setBackgroundRole(QPalette::Base);
+		scrollArea->setWidget(imageLabel);
+		scrollArea->setVisible(true);
 
 
-void Viewport::adjustScrollBar(QScrollBar* scrollBar, double factor)
-{
-	scrollBar->setValue(int(factor * scrollBar->value()
-		+ ((factor - 1) * scrollBar->pageStep() / 2)));
-}
+	}
+	QWidget* Viewport::GetViewportWidget() const
+	{
+		return widget;
+	}
+	QWidget* Viewport::GetScrollArea() const
+	{
+		return scrollArea;
+	}
+	const QLabel* Viewport::GetImageLabel() const
+	{
+		return imageLabel;
+	}
 
-void Viewport::CreateViewportWidget()
-{
-	scrollArea->setBackgroundRole(QPalette::Base);
-	scrollArea->setWidget(imageLabel);
-	scrollArea->setVisible(true);
+	const QImage& Viewport::GetImage() const
+	{
+		return image;
+	}
 
+	void Viewport::setImage(const QImage& newImage)
+	{
+		image = newImage;
+		if (image.colorSpace().isValid())
+			image.convertToColorSpace(QColorSpace::SRgb);
+		imageLabel->setPixmap(QPixmap::fromImage(image));
+		//! [4]
+		scaleFactor = 1.0;
 
-}
-QWidget* Viewport::GetViewportWidget() const
-{
-	return widget;
-}
-const QLabel* Viewport::GetImageLabel() const
-{
-	return imageLabel;
-}
+		scrollArea->setVisible(true);
+		//printAct->setEnabled(true);
+		//fitToWindowAct->setEnabled(true);
+		//updateActions();
 
-const QImage& Viewport::GetImage() const
-{
-	return image;
-}
-
-void Viewport::setImage(const QImage& newImage)
-{
-	image = newImage;
-	if (image.colorSpace().isValid())
-		image.convertToColorSpace(QColorSpace::SRgb);
-	imageLabel->setPixmap(QPixmap::fromImage(image));
-	//! [4]
-	scaleFactor = 1.0;
-
-	scrollArea->setVisible(true);
-	//printAct->setEnabled(true);
-	//fitToWindowAct->setEnabled(true);
-	//updateActions();
-
-//	if (!fitToWindowAct->isChecked())
+	//	if (!fitToWindowAct->isChecked())
 		imageLabel->adjustSize();
-}
+	}
 
-void Viewport::zoomIn()
-{
-	scaleImage(1.25);
-}
+	void Viewport::zoomIn()
+	{
+		scaleImage(1.25);
+	}
 
-void Viewport::zoomOut()
-{
-	scaleImage(0.8);
-}
+	void Viewport::zoomOut()
+	{
+		scaleImage(0.8);
+	}
 
-void Viewport::normalSize()
-{
-	imageLabel->adjustSize();
-	scaleFactor = 1.0;
-}
+	void Viewport::normalSize()
+	{
+		imageLabel->adjustSize();
+		scaleFactor = 1.0;
+	}
 
-void Viewport::fitToWindow()
-{
-	//bool fitToWindow = fitToWindowAct->isChecked();
-//	scrollArea->setWidgetResizable(fitToWindow);
-//	if (!fitToWindow)
+	void Viewport::fitToWindow()
+	{
+		//bool fitToWindow = fitToWindowAct->isChecked();
+	//	scrollArea->setWidgetResizable(fitToWindow);
+	//	if (!fitToWindow)
 		normalSize();
-//	updateActions();
-}
+		//	updateActions();
+	}
 
-void Viewport::AddActions(QMenu* menu)
-{
+	void Viewport::AddActions(QMenu* menu)
+	{
+		zoomInAct = menu->addAction(tr("Zoom &In (25%)"), this, &Viewport::zoomIn);
+		zoomInAct->setShortcut(QKeySequence::ZoomIn);
+		zoomInAct->setEnabled(false);
 
-	zoomInAct = menu->addAction(tr("Zoom &In (25%)"), this, &Viewport::zoomIn);
-	zoomInAct->setShortcut(QKeySequence::ZoomIn);
-	zoomInAct->setEnabled(false);
+		zoomOutAct = menu->addAction(tr("Zoom &Out (25%)"), this, &Viewport::zoomOut);
+		zoomOutAct->setShortcut(QKeySequence::ZoomOut);
+		zoomOutAct->setEnabled(false);
+
+		normalSizeAct = menu->addAction(tr("&Normal Size"), this, &Viewport::normalSize);
+		normalSizeAct->setShortcut(tr("Ctrl+S"));
+		normalSizeAct->setEnabled(false);
+
+		menu->addSeparator();
+
+		fitToWindowAct = menu->addAction(tr("&Fit to Window"), this, &Viewport::fitToWindow);
+		fitToWindowAct->setEnabled(false);
+		fitToWindowAct->setCheckable(true);
+		fitToWindowAct->setShortcut(tr("Ctrl+F"));
+	}
 
 
+	void Viewport::scaleImage(double factor)
+	{
+		scaleFactor *= factor;
+		imageLabel->resize(scaleFactor * imageLabel->pixmap(Qt::ReturnByValue).size());
 
-}
+		adjustScrollBar(scrollArea->horizontalScrollBar(), factor);
+		adjustScrollBar(scrollArea->verticalScrollBar(), factor);
 
-
-void Viewport::scaleImage(double factor)
-{
-	scaleFactor *= factor;
-	imageLabel->resize(scaleFactor * imageLabel->pixmap(Qt::ReturnByValue).size());
-
-	adjustScrollBar(scrollArea->horizontalScrollBar(), factor);
-	adjustScrollBar(scrollArea->verticalScrollBar(), factor);
-
-//	zoomInAct->setEnabled(scaleFactor < 3.0);
-//	zoomOutAct->setEnabled(scaleFactor > 0.333);
+		//	zoomInAct->setEnabled(scaleFactor < 3.0);
+		//	zoomOutAct->setEnabled(scaleFactor > 0.333);
+	}
 }
