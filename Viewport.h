@@ -43,6 +43,7 @@ namespace Photo
 
     //get reference of image
     const QImage& GetImage() const;
+    QImage& GetImage();
 
     //image functions
     void setImage(const QImage& newImage);

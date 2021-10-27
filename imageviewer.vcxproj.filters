@@ -21,24 +21,42 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{29725677-3f2f-4baa-be26-18cff8cf6560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Image">
+      <UniqueIdentifier>{dccc67f3-b9ef-4791-af39-6807070ca72c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App">
+      <UniqueIdentifier>{9ada2893-4548-415f-a3e0-c4163474ed0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PhotoSelector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
     <ClCompile Include="Viewport.cpp">
-      <Filter>Generated Files</Filter>
+      <Filter>Source Files\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoader.cpp">
+      <Filter>Source Files\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="PhotoSelector.cpp">
+      <Filter>Source Files\App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Viewport.h">
-      <Filter>Generated Files</Filter>
+      <Filter>Source Files\Image</Filter>
     </QtMoc>
     <QtMoc Include="PhotoSelector.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\App</Filter>
+    </QtMoc>
+    <QtMoc Include="ImageLoader.h">
+      <Filter>Source Files\Image</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -48,5 +66,13 @@
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="QDefinitions.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

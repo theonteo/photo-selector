@@ -47,6 +47,11 @@ namespace Photo
 		return image;
 	}
 
+	QImage& Viewport::GetImage()
+	{
+		return image;
+	}
+
 	void Viewport::setImage(const QImage& newImage)
 	{
 		image = newImage;

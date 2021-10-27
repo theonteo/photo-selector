@@ -2,11 +2,12 @@
 #include <QObject>
 namespace Photo
 {
-	class ImageLoader
+	class ImageLoader : public QObject
 	{
+		Q_OBJECT
 	public:
-		bool loadFile(const QString& fileName);
-		bool saveFile(const QString& fileName);
+		bool loadFile(const QString& fileName, QImage& result);
+		bool saveFile(const QString& fileName, const QImage& result);
 	};
 
 

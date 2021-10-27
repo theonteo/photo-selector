@@ -3,7 +3,6 @@
 
 #include "QDefinitions.h"
 
-
 #include <Viewport.h>
 
 
@@ -73,10 +72,12 @@ namespace Photo
 
 		QLabel* labelInput = new QLabel;
 		labelInput->setText("Input Folder");
-
+		QPushButton* inputButton = new QPushButton(tr("&Input Folder"));
+		inputButton->setFixedSize(100, 25);
 		QLabel* labelOutput = new QLabel;
 		labelOutput->setText("Output Folder");
-
+		QPushButton* outputButton = new QPushButton(tr("&Output Folder"));
+		outputButton->setFixedSize(100, 25);
 		inputFolder->setText(tr("InputFolder"));
 		outputFolder->setText(tr("OutputFolder"));
 
@@ -87,8 +88,10 @@ namespace Photo
 		vbox->addWidget(checkBox2);
 		vbox->addWidget(tristateBox);
 		vbox->addWidget(labelInput);
+		vbox->addWidget(inputButton);
 		vbox->addWidget(inputFolder);
 		vbox->addWidget(labelOutput);
+		vbox->addWidget(outputButton);
 		vbox->addWidget(outputFolder);
 		vbox->addStretch(1);
 		groupBox->setLayout(vbox);
@@ -133,7 +136,10 @@ namespace Photo
 		QFileDialog dialog(this, tr("Open File"));
 		initializeImageFileDialog(dialog, QFileDialog::AcceptOpen);
 
-		while (dialog.exec() == QDialog::Accepted && !loadFile(dialog.selectedFiles().constFirst())) {}
+		while (dialog.exec() == QDialog::Accepted && !loader.loadFile(dialog.selectedFiles().constFirst(),viewport.GetImage())) {}
+		viewport.setImage(viewport.GetImage());
+		updateActions();
+		//setWindowFilePath(fileName);
 	}
 	//! [1]
 
@@ -142,7 +148,7 @@ namespace Photo
 		QFileDialog dialog(this, tr("Save File As"));
 		initializeImageFileDialog(dialog, QFileDialog::AcceptSave);
 
-		while (dialog.exec() == QDialog::Accepted && !saveFile(dialog.selectedFiles().constFirst())) {}
+		while (dialog.exec() == QDialog::Accepted && !loader.saveFile(dialog.selectedFiles().constFirst(), viewport.GetImage())) {}
 	}
 
 	//! [5]

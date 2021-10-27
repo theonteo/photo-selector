@@ -2,6 +2,7 @@
 #define IMAGEVIEWER_H
 
 #include "Viewport.h"
+#include "ImageLoader.h"
 
 #include <QMainWindow>
 #if defined(QT_PRINTSUPPORT_LIB)
@@ -30,8 +31,6 @@ namespace Photo
 
   public:
     PhotoSelector(QWidget* parent = nullptr);
-    bool loadFile(const QString&);
-
   private slots:
     void open();
     void saveAs();
@@ -43,11 +42,10 @@ namespace Photo
   private:
 
     Viewport viewport;
+    ImageLoader loader;
 
     void createActions();
     void updateActions();
-    bool saveFile(const QString& fileName);
-
 
     //folder buttons
     QGroupBox* AddFolderButtons();
