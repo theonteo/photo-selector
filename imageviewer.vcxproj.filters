@@ -30,6 +30,12 @@
     <Filter Include="Source Files\App">
       <UniqueIdentifier>{9ada2893-4548-415f-a3e0-c4163474ed0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Folder">
+      <UniqueIdentifier>{66c05db2-b113-4919-9c50-c893b8ec642b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Viewport">
+      <UniqueIdentifier>{bc5a2f6a-e8fe-4697-8a2f-d7afa2effd05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,25 +44,31 @@
     <ClCompile Include="Utilities.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Viewport.cpp">
-      <Filter>Source Files\Image</Filter>
-    </ClCompile>
     <ClCompile Include="ImageLoader.cpp">
       <Filter>Source Files\Image</Filter>
     </ClCompile>
     <ClCompile Include="PhotoSelector.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
+    <ClCompile Include="Folder.cpp">
+      <Filter>Source Files\Folder</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewport.cpp">
+      <Filter>Source Files\Viewport</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Viewport.h">
-      <Filter>Source Files\Image</Filter>
-    </QtMoc>
     <QtMoc Include="PhotoSelector.h">
       <Filter>Source Files\App</Filter>
     </QtMoc>
     <QtMoc Include="ImageLoader.h">
       <Filter>Source Files\Image</Filter>
+    </QtMoc>
+    <QtMoc Include="Viewport.h">
+      <Filter>Source Files\Viewport</Filter>
+    </QtMoc>
+    <QtMoc Include="Widget.h">
+      <Filter>Source Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="Utilities.h">
       <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Folder.h">
+      <Filter>Source Files\Folder</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

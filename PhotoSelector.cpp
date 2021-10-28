@@ -52,48 +52,18 @@ namespace Photo
 	QGroupBox* PhotoSelector::AddFolderButtons()
 	{
 
-		QGroupBox* groupBox = new QGroupBox(tr("Non-Exclusive Checkboxes"));
+		QGroupBox* groupBox = new QGroupBox(tr("Folder Selection"));
 		groupBox->setFlat(true);
-		//! [7]
-
-		//! [8]
-		QCheckBox* checkBox1 = new QCheckBox(tr("&Checkbox 1"));
-		QCheckBox* checkBox2 = new QCheckBox(tr("C&heckbox 2"));
-		checkBox2->setChecked(true);
-		QCheckBox* tristateBox = new QCheckBox(tr("Tri-&state button"));
-		tristateBox->setTristate(true);
-		//! [8]
-		tristateBox->setCheckState(Qt::PartiallyChecked);
 
 
-		QLineEdit* inputFolder = new QLineEdit(tr("&Input Folder"));
-		QLineEdit* outputFolder = new QLineEdit(tr("&	Output Folder"));
+		folder.GenerateWidgets();
 
-
-		QLabel* labelInput = new QLabel;
-		labelInput->setText("Input Folder");
-		QPushButton* inputButton = new QPushButton(tr("&Input Folder"));
-		inputButton->setFixedSize(100, 25);
-		QLabel* labelOutput = new QLabel;
-		labelOutput->setText("Output Folder");
-		QPushButton* outputButton = new QPushButton(tr("&Output Folder"));
-		outputButton->setFixedSize(100, 25);
-		inputFolder->setText(tr("InputFolder"));
-		outputFolder->setText(tr("OutputFolder"));
-
-
-		//! [9]
 		QVBoxLayout* vbox = new QVBoxLayout;
-		vbox->addWidget(checkBox1);
-		vbox->addWidget(checkBox2);
-		vbox->addWidget(tristateBox);
-		vbox->addWidget(labelInput);
-		vbox->addWidget(inputButton);
-		vbox->addWidget(inputFolder);
-		vbox->addWidget(labelOutput);
-		vbox->addWidget(outputButton);
-		vbox->addWidget(outputFolder);
-		vbox->addStretch(1);
+
+		auto& folderWidgets = folder.GetWidgets();
+		for (auto& i : folderWidgets)
+			vbox->addWidget(i);
+
 		groupBox->setLayout(vbox);
 
 		return groupBox;
@@ -104,9 +74,6 @@ namespace Photo
 		QGroupBox* groupBox = new QGroupBox(tr("Image Selector"));
 		groupBox->setFlat(true);
 
-
-
-		//! [9]
 		QVBoxLayout* vbox = new QVBoxLayout;
 
 		for (size_t i = 0; i < 10; ++i)
@@ -136,12 +103,14 @@ namespace Photo
 		QFileDialog dialog(this, tr("Open File"));
 		initializeImageFileDialog(dialog, QFileDialog::AcceptOpen);
 
-		while (dialog.exec() == QDialog::Accepted && !loader.loadFile(dialog.selectedFiles().constFirst(),viewport.GetImage())) {}
+		while (dialog.exec() == QDialog::Accepted &&
+			!loader.loadFile(dialog.selectedFiles().constFirst(), viewport.GetImage())) {}
+
 		viewport.setImage(viewport.GetImage());
 		updateActions();
+
 		//setWindowFilePath(fileName);
 	}
-	//! [1]
 
 	void PhotoSelector::saveAs()
 	{
@@ -151,19 +120,17 @@ namespace Photo
 		while (dialog.exec() == QDialog::Accepted && !loader.saveFile(dialog.selectedFiles().constFirst(), viewport.GetImage())) {}
 	}
 
-	//! [5]
 	void PhotoSelector::print()
-		//! [5] //! [6]
 	{
 		const auto& label = viewport.GetImageLabel();
 
 
 		Q_ASSERT(!label->pixmap(Qt::ReturnByValue).isNull());
 #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printdialog)
-		//! [6] //! [7]
 		QPrintDialog dialog(&printer, this);
-		//! [7] //! [8]
-		if (dialog.exec()) {
+
+		if (dialog.exec()) 
+		{
 			QPainter painter(&printer);
 			QPixmap pixmap = label->pixmap(Qt::ReturnByValue);
 			QRect rect = painter.viewport();
@@ -176,8 +143,6 @@ namespace Photo
 #endif
 	}
 
-	//! [8]
-
 	void PhotoSelector::copy()
 	{
 #ifndef QT_NO_CLIPBOARD
@@ -188,7 +153,8 @@ namespace Photo
 #ifndef QT_NO_CLIPBOARD
 	static QImage clipboardImage()
 	{
-		if (const QMimeData* mimeData = QGuiApplication::clipboard()->mimeData()) {
+		if (const QMimeData* mimeData = QGuiApplication::clipboard()->mimeData()) 
+		{
 			if (mimeData->hasImage()) {
 				const QImage image = qvariant_cast<QImage>(mimeData->imageData());
 				if (!image.isNull())
@@ -223,7 +189,6 @@ namespace Photo
 
 	void PhotoSelector::about()
 	{
-
 	}
 
 	void PhotoSelector::createActions()
@@ -269,8 +234,5 @@ namespace Photo
 
 		saveAsAct->setEnabled(!image.isNull());
 		copyAct->setEnabled(!image.isNull());
-		//zoomInAct->setEnabled(!fitToWindowAct->isChecked());
-		//zoomOutAct->setEnabled(!fitToWindowAct->isChecked());
-		//normalSizeAct->setEnabled(!fitToWindowAct->isChecked());
 	}
 }

@@ -3,6 +3,7 @@
 
 #include "Viewport.h"
 #include "ImageLoader.h"
+#include "Folder.h"
 
 #include <QMainWindow>
 #if defined(QT_PRINTSUPPORT_LIB)
@@ -43,6 +44,7 @@ namespace Photo
 
     Viewport viewport;
     ImageLoader loader;
+    Folder folder;
 
     void createActions();
     void updateActions();

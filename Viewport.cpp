@@ -12,7 +12,6 @@ namespace Photo
 	{
 		imageLabel = new QLabel;
 		scrollArea = new QScrollArea(imageLabel);
-
 	}
 
 	void Viewport::adjustScrollBar(QScrollBar* scrollBar, double factor)

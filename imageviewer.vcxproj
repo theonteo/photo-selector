@@ -182,6 +182,7 @@
     </QtMoc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Folder.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="PhotoSelector.cpp" />
     <ClCompile Include="main.cpp" />
@@ -214,6 +215,8 @@
     <QtMoc Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Folder.h" />
+    <QtMoc Include="Widget.h" />
     <QtMoc Include="ImageLoader.h" />
     <ClInclude Include="QDefinitions.h" />
     <ClInclude Include="Utilities.h" />

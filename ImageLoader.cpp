@@ -41,16 +41,14 @@ namespace Photo
 		return true;
 	}
 
-	bool  ImageLoader::saveFile(const QString& fileName,const QImage& result)
+	bool ImageLoader::saveFile(const QString& fileName,const QImage& result)
 	{
 		QImageWriter writer(fileName);
 
 		const auto& image = result;
 
-
-
-
-		if (!writer.write(image)) {
+		if (!writer.write(image))
+		{
 			QMessageBox::information(nullptr, QGuiApplication::applicationDisplayName(),
 				Photo::PhotoSelector:: tr("Cannot write %1: %2")
 				.arg(QDir::toNativeSeparators(fileName), writer.errorString()));
