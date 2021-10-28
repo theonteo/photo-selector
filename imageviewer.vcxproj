@@ -216,7 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Folder.h" />
-    <QtMoc Include="Widget.h" />
     <QtMoc Include="ImageLoader.h" />
     <ClInclude Include="QDefinitions.h" />
     <ClInclude Include="Utilities.h" />

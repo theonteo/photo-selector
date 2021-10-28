@@ -67,9 +67,6 @@
     <QtMoc Include="Viewport.h">
       <Filter>Source Files\Viewport</Filter>
     </QtMoc>
-    <QtMoc Include="Widget.h">
-      <Filter>Source Files</Filter>
-    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">

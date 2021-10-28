@@ -3,7 +3,7 @@
 
 #include "Viewport.h"
 #include "ImageLoader.h"
-#include "Folder.h"
+
 
 #include <QMainWindow>
 #if defined(QT_PRINTSUPPORT_LIB)
@@ -14,7 +14,7 @@
 #  endif
 #endif
 
-
+#include "Folder.h"
 QT_BEGIN_NAMESPACE
 class QAction;
 class QLabel;
@@ -26,6 +26,7 @@ QT_END_NAMESPACE
 
 namespace Photo
 {
+
   class PhotoSelector : public QMainWindow
   {
     Q_OBJECT

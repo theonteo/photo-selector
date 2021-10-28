@@ -52,21 +52,20 @@ namespace Photo
 	QGroupBox* PhotoSelector::AddFolderButtons()
 	{
 
-		QGroupBox* groupBox = new QGroupBox(tr("Folder Selection"));
-		groupBox->setFlat(true);
+		
 
 
 		folder.GenerateWidgets();
 
-		QVBoxLayout* vbox = new QVBoxLayout;
+	//	QVBoxLayout* vbox = new QVBoxLayout;
 
-		auto& folderWidgets = folder.GetWidgets();
-		for (auto& i : folderWidgets)
-			vbox->addWidget(i);
+	//	auto& folderWidgets = folder.GetWidgets();
+		//for (auto& i : folderWidgets)
+		//	vbox->addWidget(i);
 
-		groupBox->setLayout(vbox);
+	//	groupBox->setLayout(vbox);
 
-		return groupBox;
+		return folder.GetGroupBox();
 
 	}
 	QGroupBox* PhotoSelector::AddImageSelector()

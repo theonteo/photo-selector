@@ -2,12 +2,18 @@
 
 #include "QDefinitions.h"
 #include "PhotoSelector.h"
-
 namespace Photo
 {
+	QGroupBox* Folder::GetGroupBox() const
+	{
+		return groupBox;
+	}
 	void Folder::GenerateWidgets()
 	{
-		QGroupBox* groupBox = new QGroupBox(PhotoSelector::tr("Folder Selection"));
+
+		box = new QVBoxLayout;
+
+		groupBox = new QGroupBox(PhotoSelector::tr("Folder Selection"));
 		groupBox->setFlat(true);
 
 		QCheckBox* checkBox1 = new QCheckBox(PhotoSelector::tr("&Checkbox 1"));
@@ -33,26 +39,33 @@ namespace Photo
 		inputFolder->setText(PhotoSelector::tr("InputFolder"));
 		outputFolder->setText(PhotoSelector::tr("OutputFolder"));
 
-		widgets.emplace_back(checkBox1);
-		widgets.emplace_back(checkBox2);
-		widgets.emplace_back(tristateBox);
-		widgets.emplace_back(labelInput);
-		widgets.emplace_back(inputButton);
-		widgets.emplace_back(inputFolder);
-		widgets.emplace_back(labelOutput);
-		widgets.emplace_back(outputButton);
-		widgets.emplace_back(outputFolder);
 
+		box->addWidget(checkBox1);
+		box->addWidget(checkBox2);
+		box->addWidget(tristateBox);
+		box->addWidget(labelInput);
+		box->addWidget(inputButton);
+		box->addWidget(inputFolder);
+		box->addWidget(labelOutput);
+		box->addWidget(outputButton);
+		box->addWidget(outputFolder);
 
+		groupBox->setLayout(box);
 
 
 		//TODO
 		//connect buttons to folder functions
-		//connect(openCoverArt, &QPushButton::clicked, this, &MetaDataDialog::openCoverArtImage);
+		connect(inputButton, &QPushButton::clicked, this, &Folder::SetInputFolderPath);
 
 	}
-	std::vector<QWidget*>& Folder::GetWidgets()
+	void Folder::SetInputFolderPath()
 	{
-		return widgets;
+		QString fileName = QFileDialog::getOpenFileName(this,
+			tr("Open Image"), QDir::currentPath(), tr("Image Files (*.png *.jpg *.bmp)"));
 	}
+	void Folder::SetOutputFolderPath()
+	{
+
+	}
+
 }
