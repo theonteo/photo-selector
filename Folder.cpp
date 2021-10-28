@@ -10,7 +10,6 @@ namespace Photo
 	}
 	void Folder::GenerateWidgets()
 	{
-
 		box = new QVBoxLayout;
 
 		groupBox = new QGroupBox(PhotoSelector::tr("Folder Selection"));
@@ -39,7 +38,7 @@ namespace Photo
 		inputFolder->setText(PhotoSelector::tr("InputFolder"));
 		outputFolder->setText(PhotoSelector::tr("OutputFolder"));
 
-
+		//add all widgets to box
 		box->addWidget(checkBox1);
 		box->addWidget(checkBox2);
 		box->addWidget(tristateBox);
@@ -53,19 +52,34 @@ namespace Photo
 		groupBox->setLayout(box);
 
 
-		//TODO
 		//connect buttons to folder functions
 		connect(inputButton, &QPushButton::clicked, this, &Folder::SetInputFolderPath);
-
+		connect(outputButton, &QPushButton::clicked, this, &Folder::SetOutputFolderPath);
 	}
 	void Folder::SetInputFolderPath()
 	{
-		QString fileName = QFileDialog::getOpenFileName(this,
-			tr("Open Image"), QDir::currentPath(), tr("Image Files (*.png *.jpg *.bmp)"));
+
+		inputPath = QFileDialog::getExistingDirectory(this, tr("Select Input Directory"),
+			"/",
+			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+
+		//QString fileName = dialog.getSaveFileName(this,
+		//	tr("Select input folder"), QDir::currentPath(), tr(""));
 	}
 	void Folder::SetOutputFolderPath()
 	{
-
+		outputPath = QFileDialog::getExistingDirectory(this, tr("Select Output Directory"),
+			"/",
+			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 	}
 
+	const QString& Folder::GetInputPath() const
+	{
+		return inputPath;
+	}
+
+	const QString& Folder::GetOutputPath() const
+	{
+		return outputPath;
+	}
 }
