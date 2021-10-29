@@ -23,7 +23,7 @@ namespace Photo
 
 		createActions();
 
-		resize(QGuiApplication::primaryScreen()->availableSize() * 3 / 5);
+		resize(QGuiApplication::primaryScreen()->availableSize() * 6 / 5);
 	}
 
 

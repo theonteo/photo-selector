@@ -58,7 +58,7 @@ namespace Photo
 			image.convertToColorSpace(QColorSpace::SRgb);
 		imageLabel->setPixmap(QPixmap::fromImage(image));
 		//! [4]
-		scaleFactor = 1.0;
+		scaleFactor =1.0;
 
 		scrollArea->setVisible(true);
 		//printAct->setEnabled(true);
@@ -67,6 +67,8 @@ namespace Photo
 
 	//	if (!fitToWindowAct->isChecked())
 		imageLabel->adjustSize();
+		zoomOut();
+
 	}
 
 	void Viewport::zoomIn()
@@ -119,8 +121,9 @@ namespace Photo
 
 	void Viewport::scaleImage(double factor)
 	{
-		scaleFactor *= factor;
-		imageLabel->resize(scaleFactor * imageLabel->pixmap(Qt::ReturnByValue).size());
+		scaleFactor*= factor;
+		const auto& res = imageLabel->pixmap(Qt::ReturnByValue).size();
+		imageLabel->resize(scaleFactor * res);
 
 		adjustScrollBar(scrollArea->horizontalScrollBar(), factor);
 		adjustScrollBar(scrollArea->verticalScrollBar(), factor);
