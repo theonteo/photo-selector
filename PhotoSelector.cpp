@@ -51,40 +51,13 @@ namespace Photo
 	}
 	QGroupBox* PhotoSelector::AddFolderButtons()
 	{
-
-		
-
-
 		folder.GenerateWidgets();
-
-	//	QVBoxLayout* vbox = new QVBoxLayout;
-
-	//	auto& folderWidgets = folder.GetWidgets();
-		//for (auto& i : folderWidgets)
-		//	vbox->addWidget(i);
-
-	//	groupBox->setLayout(vbox);
-
 		return folder.GetGroupBox();
-
 	}
-	QGroupBox* PhotoSelector::AddImageSelector()
+	QScrollArea* PhotoSelector::AddImageSelector()
 	{
-		QGroupBox* groupBox = new QGroupBox(tr("Image Selector"));
-		groupBox->setFlat(true);
-
-		QVBoxLayout* vbox = new QVBoxLayout;
-
-		for (size_t i = 0; i < 10; ++i)
-		{
-			QCheckBox* checkBox = new QCheckBox(tr("&Checkbox"));
-			vbox->addWidget(checkBox);
-		}
-
-		vbox->addStretch(1);
-		groupBox->setLayout(vbox);
-
-		return groupBox;
+		 selector.GenerateWidgets();
+		 return selector.GetScrollArea();
 	}
 	void PhotoSelector::AddAllWidgets(QMainWindow* window)
 	{
@@ -95,7 +68,24 @@ namespace Photo
 		grid->addWidget(AddFolderButtons(), 0, 0, 1, 1);
 		grid->addWidget(AddImageSelector(), 0, 1, 1, 1);
 		grid->addWidget(viewport.GetScrollArea(), 1, 0, 1, 1);
+
 		viewport.CreateViewportWidget();
+	}
+	const Folder& PhotoSelector::GetFolder() const
+	{
+		return folder;
+	}
+	Folder& PhotoSelector::GetFolder()
+	{
+		return folder;
+	}
+	const Selector& PhotoSelector::GetSelector() const
+	{
+		return selector;
+	}
+	Selector& PhotoSelector::GetSelector()
+	{
+		return selector;
 	}
 	void PhotoSelector::open()
 	{

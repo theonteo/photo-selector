@@ -19,5 +19,6 @@
 #include <QImageReader>
 #include <QCheckBox>
 #include <QGridLayout>
+#include <QScrollArea>
 #include <qlineedit.h>
 

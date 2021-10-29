@@ -2,6 +2,9 @@
 
 #include "QDefinitions.h"
 #include "PhotoSelector.h"
+#include "Service.h"
+#include "Selector.h"
+
 namespace Photo
 {
 	QGroupBox* Folder::GetGroupBox() const
@@ -23,20 +26,21 @@ namespace Photo
 
 		tristateBox->setCheckState(Qt::PartiallyChecked);
 
-		QLineEdit* inputFolder = new QLineEdit(PhotoSelector::tr("&Input Folder"));
-		QLineEdit* outputFolder = new QLineEdit(PhotoSelector::tr("&	Output Folder"));
+		//QLineEdit* inputFolder = new QLineEdit(PhotoSelector::tr("&Input Folder"));
+		//QLineEdit* outputFolder = new QLineEdit(PhotoSelector::tr("&	Output Folder"));
 
 
-		QLabel* labelInput = new QLabel;
-		labelInput->setText("Input Folder");
+		labelInput = new QLabel;
+		labelInput->setText("Input Folder: None");
 		QPushButton* inputButton = new QPushButton(PhotoSelector::tr("&Input Folder"));
 		inputButton->setFixedSize(100, 25);
-		QLabel* labelOutput = new QLabel;
-		labelOutput->setText("Output Folder");
+		labelOutput = new QLabel;
+		labelOutput->setText("Output Folder: None");
 		QPushButton* outputButton = new QPushButton(PhotoSelector::tr("&Output Folder"));
 		outputButton->setFixedSize(100, 25);
-		inputFolder->setText(PhotoSelector::tr("InputFolder"));
-		outputFolder->setText(PhotoSelector::tr("OutputFolder"));
+
+		//inputFolder->setText(PhotoSelector::tr("InputFolder"));
+		//outputFolder->setText(PhotoSelector::tr("OutputFolder"));
 
 		//add all widgets to box
 		box->addWidget(checkBox1);
@@ -44,10 +48,10 @@ namespace Photo
 		box->addWidget(tristateBox);
 		box->addWidget(labelInput);
 		box->addWidget(inputButton);
-		box->addWidget(inputFolder);
+		//box->addWidget(inputFolder);
 		box->addWidget(labelOutput);
 		box->addWidget(outputButton);
-		box->addWidget(outputFolder);
+		//box->addWidget(outputFolder);
 
 		groupBox->setLayout(box);
 
@@ -63,14 +67,30 @@ namespace Photo
 			"/",
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
+
+		labelInput->setText("Input Folder : " + inputPath);
+
 		//QString fileName = dialog.getSaveFileName(this,
 		//	tr("Select input folder"), QDir::currentPath(), tr(""));
+
+
+		//generate directory iterator
+		directory.GenerateDirectory(inputPath);
+
+		//const auto& allFiles = directory.GetDirectoryFileNames();
+
+	auto& selector = Data::Service<PhotoSelector>::Get().GetSelector();
+		selector.GenerateFileCheckbox();
+
 	}
 	void Folder::SetOutputFolderPath()
 	{
 		outputPath = QFileDialog::getExistingDirectory(this, tr("Select Output Directory"),
 			"/",
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+
+		//change output label
+		labelOutput->setText("Output Folder : " + outputPath);
 	}
 
 	const QString& Folder::GetInputPath() const
@@ -81,5 +101,9 @@ namespace Photo
 	const QString& Folder::GetOutputPath() const
 	{
 		return outputPath;
+	}
+	const LoadDirectory& Folder::GetDirectory() const
+	{
+		return directory;
 	}
 }

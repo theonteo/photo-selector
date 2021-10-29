@@ -3,7 +3,8 @@
 
 #include "Viewport.h"
 #include "ImageLoader.h"
-
+#include "Folder.h"
+#include "Selector.h"
 
 #include <QMainWindow>
 #if defined(QT_PRINTSUPPORT_LIB)
@@ -14,7 +15,6 @@
 #  endif
 #endif
 
-#include "Folder.h"
 QT_BEGIN_NAMESPACE
 class QAction;
 class QLabel;
@@ -26,46 +26,56 @@ QT_END_NAMESPACE
 
 namespace Photo
 {
+	class PhotoSelector : public QMainWindow
+	{
+		Q_OBJECT
 
-  class PhotoSelector : public QMainWindow
-  {
-    Q_OBJECT
+	public:
+		PhotoSelector(QWidget* parent = nullptr);
 
-  public:
-    PhotoSelector(QWidget* parent = nullptr);
-  private slots:
-    void open();
-    void saveAs();
-    void print();
-    void copy();
-    void paste();
-    void about();
+	private slots:
+		void open();
+		void saveAs();
+		void print();
+		void copy();
+		void paste();
+		void about();
 
-  private:
+	private:
 
-    Viewport viewport;
-    ImageLoader loader;
-    Folder folder;
-
-    void createActions();
-    void updateActions();
-
-    //folder buttons
-    QGroupBox* AddFolderButtons();
-    QGroupBox* AddImageSelector();
-    QWidget* centralWidget;
+		//custom widgets for app
+		Viewport viewport;
+		ImageLoader loader;
+		Folder folder;
+		Selector selector;
 
 
-    void AddAllWidgets(QMainWindow* window);
+		void createActions();
+		void updateActions();
+
+		//folder buttons
+		QGroupBox* AddFolderButtons();
+		QScrollArea* AddImageSelector();
+		QWidget* centralWidget;
+
+		void AddAllWidgets(QMainWindow* window);
+
 
 #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printer)
-    QPrinter printer;
+		QPrinter printer;
 #endif
 
-    QAction* saveAsAct;
-    QAction* printAct;
-    QAction* copyAct;
-  };
+		QAction* saveAsAct;
+		QAction* printAct;
+		QAction* copyAct;
+
+	public:
+		const Folder& GetFolder() const;
+		Folder& GetFolder();
+
+		const Selector& GetSelector() const;
+		Selector& GetSelector();
+	};
 }
 
 #endif

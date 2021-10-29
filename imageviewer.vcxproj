@@ -184,8 +184,10 @@
   <ItemGroup>
     <ClCompile Include="Folder.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="LoadDirectory.cpp" />
     <ClCompile Include="PhotoSelector.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Selector.cpp" />
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
@@ -216,6 +218,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Folder.h" />
+    <ClInclude Include="LoadDirectory.h" />
+    <ClInclude Include="Selector.h" />
+    <ClInclude Include="Service.h" />
     <QtMoc Include="ImageLoader.h" />
     <ClInclude Include="QDefinitions.h" />
     <ClInclude Include="Utilities.h" />

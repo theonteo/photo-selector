@@ -30,11 +30,17 @@
     <Filter Include="Source Files\App">
       <UniqueIdentifier>{9ada2893-4548-415f-a3e0-c4163474ed0b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Folder">
+    <Filter Include="Source Files\Widget">
+      <UniqueIdentifier>{da4d53ff-31b4-47be-a307-3367d51df983}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Widget\Viewport">
+      <UniqueIdentifier>{bc5a2f6a-e8fe-4697-8a2f-d7afa2effd05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Widget\Folder">
       <UniqueIdentifier>{66c05db2-b113-4919-9c50-c893b8ec642b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Viewport">
-      <UniqueIdentifier>{bc5a2f6a-e8fe-4697-8a2f-d7afa2effd05}</UniqueIdentifier>
+    <Filter Include="Source Files\Widget\Selector">
+      <UniqueIdentifier>{ba14eb80-df5a-4465-9b0f-d000edbeed81}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,10 +57,16 @@
       <Filter>Source Files\App</Filter>
     </ClCompile>
     <ClCompile Include="Folder.cpp">
-      <Filter>Source Files\Folder</Filter>
+      <Filter>Source Files\Widget\Folder</Filter>
     </ClCompile>
     <ClCompile Include="Viewport.cpp">
-      <Filter>Source Files\Viewport</Filter>
+      <Filter>Source Files\Widget\Viewport</Filter>
+    </ClCompile>
+    <ClCompile Include="Selector.cpp">
+      <Filter>Source Files\Widget\Selector</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadDirectory.cpp">
+      <Filter>Source Files\Widget\Folder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,7 +77,7 @@
       <Filter>Source Files\Image</Filter>
     </QtMoc>
     <QtMoc Include="Viewport.h">
-      <Filter>Source Files\Viewport</Filter>
+      <Filter>Source Files\Widget\Viewport</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +96,16 @@
       <Filter>Source Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Folder.h">
-      <Filter>Source Files\Folder</Filter>
+      <Filter>Source Files\Widget\Folder</Filter>
+    </ClInclude>
+    <ClInclude Include="Selector.h">
+      <Filter>Source Files\Widget\Selector</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadDirectory.h">
+      <Filter>Source Files\Widget\Folder</Filter>
+    </ClInclude>
+    <ClInclude Include="Service.h">
+      <Filter>Source Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
