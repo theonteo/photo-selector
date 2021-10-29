@@ -42,8 +42,14 @@ namespace Photo
 				std::unique_ptr< QCheckBox> checkBox =
 					std::make_unique< QCheckBox>(tr(directories[i].toStdString().c_str()));
 
+				//connect hover
+			/*	QObject::connect(&*checkBox, SIGNAL(clicked()), this, SLOT(SizeCHange()));*/
+				connect(&*checkBox, &QCheckBox::clicked, this, &Selector::ShowImageOnViewport);
+
 				box->addWidget(&*checkBox);
 				checkBoxes.insert({ directories[i], std::move(checkBox) });
+
+				
 			}
 		}
 	}
@@ -76,5 +82,9 @@ namespace Photo
 		widget->setLayout(box);
 		scrollArea->setWidget(widget);
 		//groupBox->setLayout(box);
+	}
+	void Selector::ShowImageOnViewport(bool ar)
+	{
+		int x = 0;
 	}
 }

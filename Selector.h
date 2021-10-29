@@ -35,6 +35,8 @@ namespace Photo
 
 		void GetSelectedCheckboxes();
 		void GenerateWidgets();
+
+		void ShowImageOnViewport(bool ar);
 	};
 }
 
