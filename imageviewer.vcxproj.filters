@@ -50,9 +50,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities.cpp">
-      <Filter>Source Files\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="ImageLoader.cpp">
       <Filter>Source Files\Image</Filter>
     </ClCompile>
@@ -100,9 +97,6 @@
   <ItemGroup>
     <ClInclude Include="QDefinitions.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities.h">
-      <Filter>Source Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Folder.h">
       <Filter>Source Files\Widget\Folder</Filter>

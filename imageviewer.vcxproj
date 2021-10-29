@@ -189,7 +189,6 @@
     <ClCompile Include="PhotoSelector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Selector.cpp" />
-    <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -225,7 +224,6 @@
     <ClInclude Include="Service.h" />
     <QtMoc Include="ImageLoader.h" />
     <ClInclude Include="QDefinitions.h" />
-    <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
