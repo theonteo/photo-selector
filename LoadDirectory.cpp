@@ -15,10 +15,8 @@ namespace Photo
 			const auto& path = entry.path();
 			if (path.extension() == ext)
 			{
-
 				directoryFileNames.emplace_back
 				(QString(path.filename().string().c_str()));
-
 			}
 		}
 	}

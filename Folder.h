@@ -33,6 +33,9 @@ namespace Photo
 		//output folder dialog
 		void SetOutputFolderPath();
 
+		//export selected images
+		void ExportImages();
+
 	public:
 
 		//return read string

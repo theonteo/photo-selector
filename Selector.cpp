@@ -11,12 +11,16 @@ namespace Photo
 	}
 
 	Selector::Selector()
-	{
-	}
+	{	}
 
 	QScrollArea* Selector::GetScrollArea() const
 	{
 		return scrollArea;
+	}
+
+	const std::vector<QString>& Selector::GetImagesPath() const
+	{
+		return selectedImagesPath;
 	}
 
 	void Selector::GenerateFileCheckbox()
@@ -26,7 +30,6 @@ namespace Photo
 			box->removeWidget(&*i.second);
 
 		checkBoxes.clear();
-
 
 		if (Data::Service<PhotoSelector>::Exist())
 		{
@@ -47,12 +50,11 @@ namespace Photo
 
 	void Selector::GetSelectedCheckboxes()
 	{
-		std::vector<QString> allSelectedImages;
 		for (const auto& [fileName, checkbox] : checkBoxes)
 		{
 			if (checkbox->isChecked())
 			{
-				allSelectedImages.push_back(fileName);
+				selectedImagesPath.push_back(fileName);
 			}
 		}
 	}
@@ -73,11 +75,6 @@ namespace Photo
 		box->addStretch(0);
 		widget->setLayout(box);
 		scrollArea->setWidget(widget);
-
-
-
 		//groupBox->setLayout(box);
-
-
 	}
 }
