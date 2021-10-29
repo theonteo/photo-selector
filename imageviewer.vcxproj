@@ -182,6 +182,7 @@
     </QtMoc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ImageCheckBox.cpp" />
     <ClCompile Include="Folder.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="LoadDirectory.cpp" />
@@ -217,6 +218,7 @@
     <QtMoc Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="ImageCheckBox.h" />
     <ClInclude Include="Folder.h" />
     <ClInclude Include="LoadDirectory.h" />
     <ClInclude Include="Selector.h" />

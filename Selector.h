@@ -2,6 +2,7 @@
 #include <QWidget>
 #include <map>
 #include <vector>
+#include "ImageCheckBox.h"
 
 QT_BEGIN_NAMESPACE
 class QVBoxLayout;
@@ -9,8 +10,8 @@ class QGroupBox;
 class QScrollArea;
 class QWidget;
 class QCheckBox;
-QT_END_NAMESPACE
 
+QT_END_NAMESPACE
 namespace Photo
 {
 	class Selector final : public QWidget
@@ -23,7 +24,7 @@ namespace Photo
 	public:
 		Selector();
 
-		std::map<QString,std::unique_ptr<QCheckBox>> checkBoxes;
+		std::map<QString,std::unique_ptr<ImageCheckBox>> checkBoxes;
 		std::vector<QString> selectedImagesPath;
 
 		QGroupBox* GetGroupBox() const;

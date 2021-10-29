@@ -33,8 +33,8 @@ namespace Photo
 	public:
 		PhotoSelector(QWidget* parent = nullptr);
 
-	private slots:
-		void open();
+	public slots:
+		void open(const QString& str);
 		void saveAs();
 		void print();
 		void copy();

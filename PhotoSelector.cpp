@@ -87,13 +87,19 @@ namespace Photo
 	{
 		return selector;
 	}
-	void PhotoSelector::open()
+	void PhotoSelector::open(const QString& str)
 	{
-		QFileDialog dialog(this, tr("Open File"));
-		initializeImageFileDialog(dialog, QFileDialog::AcceptOpen);
 
-		while (dialog.exec() == QDialog::Accepted &&
-			!loader.loadFile(dialog.selectedFiles().constFirst(), viewport.GetImage())) {}
+		
+
+
+		//QFileDialog dialog(this, tr("Open File"));
+	//	initializeImageFileDialog(dialog, QFileDialog::AcceptOpen);
+		const auto& openStr = 
+			//	while (
+			loader.loadFile(str, viewport.GetImage());
+		//while (dialog.exec() == QDialog::Accepted &&
+			//!loader.loadFile(dialog.selectedFiles().constFirst(), viewport.GetImage())) {}
 
 		viewport.setImage(viewport.GetImage());
 		updateActions();
@@ -184,8 +190,8 @@ namespace Photo
 	{
 		QMenu* fileMenu = menuBar()->addMenu(tr("&File"));
 
-		QAction* openAct = fileMenu->addAction(tr("&Open..."), this, &PhotoSelector::open);
-		openAct->setShortcut(QKeySequence::Open);
+		//QAction* openAct = fileMenu->addAction(tr("&Open..."), this, &PhotoSelector::open);
+		//openAct->setShortcut(QKeySequence::Open);
 
 		saveAsAct = fileMenu->addAction(tr("&Save As..."), this, &PhotoSelector::saveAs);
 		saveAsAct->setEnabled(false);

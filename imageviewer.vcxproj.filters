@@ -42,6 +42,9 @@
     <Filter Include="Source Files\Widget\Selector">
       <UniqueIdentifier>{ba14eb80-df5a-4465-9b0f-d000edbeed81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Widget\CheckBox">
+      <UniqueIdentifier>{5b6d83bb-4579-4c87-8757-3ffa30076a75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,6 +71,9 @@
     <ClCompile Include="LoadDirectory.cpp">
       <Filter>Source Files\Widget\Folder</Filter>
     </ClCompile>
+    <ClCompile Include="ImageCheckBox.cpp">
+      <Filter>Source Files\Widget\CheckBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="PhotoSelector.h">
@@ -78,6 +84,9 @@
     </QtMoc>
     <QtMoc Include="Viewport.h">
       <Filter>Source Files\Widget\Viewport</Filter>
+    </QtMoc>
+    <QtMoc Include="ImageCheckBox.h">
+      <Filter>Source Files\Widget\CheckBox</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

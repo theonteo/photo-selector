@@ -2,6 +2,7 @@
 #include "QDefinitions.h"
 #include "Service.h"
 #include "PhotoSelector.h"
+#include "ImageCheckBox.h"
 
 namespace Photo
 {
@@ -39,9 +40,9 @@ namespace Photo
 			//get info from load directory
 			for (size_t i = 0; i < directories.size(); ++i)
 			{
-				std::unique_ptr< QCheckBox> checkBox =
-					std::make_unique< QCheckBox>(tr(directories[i].toStdString().c_str()));
-
+				std::unique_ptr< ImageCheckBox> checkBox =
+					std::make_unique< ImageCheckBox>(tr(directories[i].toStdString().c_str()));
+			//	std::make_unique<QCheckBox>(tr(directories[i].toStdString().c_str()));
 				//connect hover
 			/*	QObject::connect(&*checkBox, SIGNAL(clicked()), this, SLOT(SizeCHange()));*/
 				connect(&*checkBox, &QCheckBox::clicked, this, &Selector::ShowImageOnViewport);
@@ -85,6 +86,8 @@ namespace Photo
 	}
 	void Selector::ShowImageOnViewport(bool ar)
 	{
-		int x = 0;
+		const auto& photoSelector = Data::Service<PhotoSelector>::Get();
+		/*photoSelector.open()
+		int x = 0;*/
 	}
 }
