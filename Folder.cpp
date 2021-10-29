@@ -109,7 +109,8 @@ namespace Photo
 				const auto& filePath = (inputPath + "/" + i).toStdString();
 				const auto& fileExportPath = (outputPath + "/" + i).toStdString();
 
-				std::filesystem::copy_file(filePath, fileExportPath);
+				if (!std::filesystem::exists(fileExportPath))
+					std::filesystem::copy_file(filePath, fileExportPath);
 			}
 		}
 		catch (std::exception& e)

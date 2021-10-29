@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    QGuiApplication::setApplicationDisplayName(Photo::PhotoSelector::tr("Image Viewer"));
+    QGuiApplication::setApplicationDisplayName(Photo::PhotoSelector::tr("Photo Selector"));
     QCommandLineParser commandLineParser;
 
     commandLineParser.addHelpOption();
