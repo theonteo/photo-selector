@@ -9,7 +9,6 @@ namespace Photo
 	{
 		std::string ext(".jpg");
 
-
 		const auto& str = directorypath.toStdString();
 		for (const auto& entry : std::filesystem::directory_iterator(str))
 		{

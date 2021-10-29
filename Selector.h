@@ -1,6 +1,6 @@
 #pragma once
 #include <QWidget>
-#include <vector>
+#include <map>
 
 QT_BEGIN_NAMESPACE
 class QVBoxLayout;
@@ -21,12 +21,13 @@ namespace Photo
 
 	public:
 		Selector();
-		std::vector<std::unique_ptr<QCheckBox>> checkBoxes;
+		std::map<QString,std::unique_ptr<QCheckBox>> checkBoxes;
 		QGroupBox* GetGroupBox() const;
 		QScrollArea* GetScrollArea() const;
 
 		void GenerateFileCheckbox();
 
+		void GetSelectedCheckboxes();
 		void GenerateWidgets();
 	};
 }
