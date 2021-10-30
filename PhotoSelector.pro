@@ -5,7 +5,7 @@ QT += widgets
 requires(qtConfig(filedialog))
 qtHaveModule(printsupport): QT += printsupport
 TEMPLATE = app
-TARGET = imageviewer
+TARGET = PhotoSelector
 DESTDIR = ./debug
 CONFIG += debug
 DEFINES += _WINDOWS _UNICODE _ENABLE_EXTENDED_ALIGNED_STORAGE WIN64
@@ -16,4 +16,4 @@ MOC_DIR += .
 OBJECTS_DIR += debug
 UI_DIR += GeneratedFiles
 RCC_DIR += GeneratedFiles
-include(imageviewer.pri)
+include(PhotoSelector.pri)
