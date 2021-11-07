@@ -1,4 +1,17 @@
-#pragma once
+/*****************************************************************************/
+/*!
+\file Viewport.h
+\author Theon Teo
+\par email: theonteo96@gmail.com
+\date 2021
+\brief
+This project contains simple qt application
+\Not for distribution
+*/
+/*****************************************************************************/
+
+#ifndef VIEWPORT_H
+#define VIEWPORT_H
 
 #include <QImage>
 #include <QObject>
@@ -14,7 +27,7 @@ class QWidget;
 class QObject;
 QT_END_NAMESPACE
 
-namespace Photo
+namespace PhotoSelector
 {
 	class Viewport :public QObject
 	{
@@ -64,5 +77,6 @@ namespace Photo
 		void AddActions(QMenu* menu);
 
 	};
-
 }
+
+#endif

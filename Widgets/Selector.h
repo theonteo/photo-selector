@@ -1,4 +1,17 @@
-#pragma once
+/*****************************************************************************/
+/*!
+\file Selector.h
+\author Theon Teo
+\par email: theonteo96@gmail.com
+\date 2021
+\brief
+This project contains simple qt application
+\Not for distribution
+*/
+/*****************************************************************************/
+
+#ifndef SELECTOR_H
+#define SELECTOR_H
 #include <QWidget>
 #include <map>
 #include <vector>
@@ -12,10 +25,11 @@ class QWidget;
 class QCheckBox;
 
 QT_END_NAMESPACE
-namespace Photo
+namespace PhotoSelector
 {
 	class Selector final : public QWidget
 	{
+		//selector widgets
 		std::unique_ptr <QVBoxLayout> box{ nullptr };
 		std::unique_ptr <QGroupBox> groupBox{ nullptr };
 		std::unique_ptr <QScrollArea> scrollArea{ nullptr };
@@ -24,20 +38,19 @@ namespace Photo
 	public:
 		Selector();
 
+		//stores all checkbox widgets
 		std::map<QString, std::unique_ptr<ImageCheckBox>> checkBoxes;
 		std::vector<QString> selectedImagesPath;
 
+		//getters
 		const std::unique_ptr < QGroupBox>& GetGroupBox() const;
 		const std::unique_ptr < QScrollArea>& GetScrollArea() const;
-
 		const std::vector<QString>& GetImagesPath() const;
 
 		void GenerateFileCheckbox();
-
 		void GetSelectedCheckboxes();
 		void GenerateWidgets();
-
-		void ShowImageOnViewport(bool ar);
 	};
 }
 
+#endif

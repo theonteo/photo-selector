@@ -1,4 +1,18 @@
-#pragma once
+/*****************************************************************************/
+/*!
+\file QDefinition.h
+\author Theon Teo
+\par email: theonteo96@gmail.com
+\date 2021
+\brief
+This project contains simple qt application
+\Not for distribution
+*/
+/*****************************************************************************/
+
+#ifndef QDEF_H
+#define QDEF_H
+
 #include <QApplication>
 #include <QClipboard>
 #include <QDir>
@@ -22,3 +36,4 @@
 #include <QScrollArea>
 #include <qlineedit.h>
 
+#endif

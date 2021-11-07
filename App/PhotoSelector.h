@@ -1,5 +1,17 @@
-#ifndef IMAGEVIEWER_H
-#define IMAGEVIEWER_H
+/*****************************************************************************/
+/*!
+\file PhotoSelector.h
+\author Theon Teo
+\par email: theonteo96@gmail.com
+\date 2021
+\brief
+This project contains simple qt application
+\Not for distribution
+*/
+/*****************************************************************************/
+
+#ifndef PHOTOSELECTOR_H
+#define PHOTOSELECTOR_H
 
 #include "Widgets/Viewport.h"
 #include "Image/ImageLoader.h"
@@ -24,11 +36,12 @@ class QScrollBar;
 class QGroupBox;
 QT_END_NAMESPACE
 
-namespace Photo
+namespace PhotoSelector
 {
-	class PhotoSelector : public QMainWindow
+	class PhotoSelector final : public QMainWindow
 	{
 	public:
+		//constructor
 		PhotoSelector(QWidget* parent = nullptr);
 
 	public slots:
@@ -45,18 +58,19 @@ namespace Photo
 		ImageLoader loader;
 		Folder folder;
 		Selector selector;
+		
+		std::unique_ptr < QWidget> centralWidget;
 
-
+		//action funcs
 		void createActions();
 		void updateActions();
+
+		//widget func - collate all widgets
+		void AddAllWidgets();
 
 		//folder buttons
 		const std::unique_ptr<QGroupBox>& AddFolderButtons();
 		const std::unique_ptr < QScrollArea>& AddImageSelector();
-		std::unique_ptr < QWidget> centralWidget;
-
-		void AddAllWidgets();
-
 
 #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printer)
 		QPrinter printer;

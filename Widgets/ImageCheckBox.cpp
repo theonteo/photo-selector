@@ -1,15 +1,21 @@
-#include "ImageCheckBox.h"
+/*****************************************************************************/
+/*!
+\file ImageCheckBox.cpp
+\author Theon Teo
+\par email: theonteo96@gmail.com
+\date 2021
+\brief
+This project contains simple qt application
+\Not for distribution
+*/
+/*****************************************************************************/
+#include "App/QDefinitions.h"
+#include "Widgets/ImageCheckBox.h"
 #include "App/PhotoSelector.h"
 #include "Widgets/Service.h"
 
 void ImageCheckBox::enterEvent(QEnterEvent* ev)
 {
-
-	auto& app = Data::Service<Photo::PhotoSelector>().Get();
+	auto& app = Data::Service<PhotoSelector::PhotoSelector>().Get();
 	app.open(app.GetFolder().GetInputPath() + "/" + text);
-	//func();
-}
-
-void ImageCheckBox::leaveEvent(QEvent* ev)
-{
 }

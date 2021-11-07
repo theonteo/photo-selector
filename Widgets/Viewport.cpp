@@ -1,3 +1,15 @@
+/*****************************************************************************/
+/*!
+\file Viewport.cpp
+\author Theon Teo
+\par email: theonteo96@gmail.com
+\date 2021
+\brief
+This project contains simple qt application
+\Not for distribution
+*/
+/*****************************************************************************/
+
 #include "Widgets/Viewport.h"
 
 #include <QScrollBar>
@@ -6,7 +18,7 @@
 #include <QColorSpace>
 #include <QMenu>
 #include <QObject>
-namespace Photo
+namespace PhotoSelector
 {
 	Viewport::Viewport()
 	{

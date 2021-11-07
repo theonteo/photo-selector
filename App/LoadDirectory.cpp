@@ -1,12 +1,30 @@
+/*****************************************************************************/
+/*!
+\file LoadDirectory.cpp
+\author Theon Teo
+\par email: theonteo96@gmail.com
+\date 2021
+\brief
+This project contains simple qt application
+\Not for distribution
+*/
+/*****************************************************************************/
+
 #include "App/LoadDirectory.h"
 
 #include <filesystem>
 #include <qstring.h>
 
-namespace Photo
+namespace PhotoSelector
 {
+	/**************************************************************************/
+	/*
+		 \brief generate all image paths from directory
+	*/
+	/**************************************************************************/
 	void LoadDirectory::GenerateDirectory(const QString& directorypath)
 	{
+		//currently only support jpg
 		std::string ext(".jpg");
 
 		const auto& str = directorypath.toStdString();
@@ -20,7 +38,11 @@ namespace Photo
 			}
 		}
 	}
-
+	/**************************************************************************/
+	/*
+		 \brief return file names
+	*/
+	/**************************************************************************/
 	const std::vector<QString>& LoadDirectory::GetDirectoryFileNames() const
 	{
 		return directoryFileNames;

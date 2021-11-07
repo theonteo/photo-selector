@@ -73,11 +73,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Widgets\ImageCheckBox.h">
-      <Filter>Source Files\Widget\CheckBox</Filter>
-    </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
@@ -109,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="App\PhotoSelector.h">
       <Filter>Source Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\ImageCheckBox.h">
+      <Filter>Source Files\Widget\CheckBox</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

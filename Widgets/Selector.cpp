@@ -1,29 +1,34 @@
+/*****************************************************************************/
+/*!
+\file Selector.cpp
+\author Theon Teo
+\par email: theonteo96@gmail.com
+\date 2021
+\brief
+This project contains simple qt application
+\Not for distribution
+*/
+/*****************************************************************************/
+
 #include "Widgets/Selector.h"
 #include "App/QDefinitions.h"
 #include "Widgets/Service.h"
 #include "App/PhotoSelector.h"
 #include "Widgets/ImageCheckBox.h"
 
-namespace Photo
+namespace PhotoSelector
 {
-	const std::unique_ptr < QGroupBox>& Selector::GetGroupBox() const
-	{
-		return groupBox;
-	}
-
-	Selector::Selector()
-	{	}
-
-	const std::unique_ptr < QScrollArea>& Selector::GetScrollArea() const
-	{
-		return scrollArea;
-	}
-
-	const std::vector<QString>& Selector::GetImagesPath() const
-	{
-		return selectedImagesPath;
-	}
-
+	/**************************************************************************/
+	/*
+		 \brief constructor
+	*/
+	/**************************************************************************/
+	Selector::Selector(){}
+	/**************************************************************************/
+	/*
+		 \brief
+	*/
+	/**************************************************************************/
 	void Selector::GenerateFileCheckbox()
 	{
 		//remove all checkboxes
@@ -45,7 +50,6 @@ namespace Photo
 				//	std::make_unique<QCheckBox>(tr(directories[i].toStdString().c_str()));
 					//connect hover
 				/*	QObject::connect(&*checkBox, SIGNAL(clicked()), this, SLOT(SizeCHange()));*/
-				connect(&*checkBox, &QCheckBox::clicked, this, &Selector::ShowImageOnViewport);
 
 				box->addWidget(&*checkBox);
 				checkBoxes.insert({ directories[i], std::move(checkBox) });
@@ -54,7 +58,11 @@ namespace Photo
 			}
 		}
 	}
-
+	/**************************************************************************/
+	/*
+		 \brief
+	*/
+	/**************************************************************************/
 	void Selector::GetSelectedCheckboxes()
 	{
 		for (const auto& [fileName, checkbox] : checkBoxes)
@@ -65,7 +73,11 @@ namespace Photo
 			}
 		}
 	}
-
+	/**************************************************************************/
+	/*
+		 \brief
+	*/
+	/**************************************************************************/
 	void Selector::GenerateWidgets()
 	{
 		box = std::make_unique< QVBoxLayout>();
@@ -82,8 +94,31 @@ namespace Photo
 		scrollArea->setWidget(&*widget);
 
 	}
-	void Selector::ShowImageOnViewport(bool ar)
+	/**************************************************************************/
+	/*
+		 \brief
+	*/
+	/**************************************************************************/
+	const std::unique_ptr < QGroupBox>& Selector::GetGroupBox() const
 	{
-		//const auto& photoSelector = Data::Service<PhotoSelector>::Get();
+		return groupBox;
+	}
+	/**************************************************************************/
+	/*
+		 \brief
+	*/
+	/**************************************************************************/
+	const std::unique_ptr < QScrollArea>& Selector::GetScrollArea() const
+	{
+		return scrollArea;
+	}
+	/**************************************************************************/
+	/*
+		 \brief
+	*/
+	/**************************************************************************/
+	const std::vector<QString>& Selector::GetImagesPath() const
+	{
+		return selectedImagesPath;
 	}
 }

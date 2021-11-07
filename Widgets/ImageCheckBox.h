@@ -1,4 +1,16 @@
-#pragma once
+/*****************************************************************************/
+/*!
+\file ImageCheckBox.h
+\author Theon Teo
+\par email: theonteo96@gmail.com
+\date 2021
+\brief
+This project contains simple qt application
+\Not for distribution
+*/
+/*****************************************************************************/
+#ifndef IMAGECHECKBOX_H
+#define IMAGECHECKBOX_H
 
 #include <QCheckBox>
 #include <QWidget>
@@ -11,10 +23,8 @@ QT_END_NAMESPACE
 
 class ImageCheckBox : public QCheckBox
 {
-	Q_OBJECT
-		QString text;
+	QString text;
 public:
-
 	ImageCheckBox(QWidget* parent = nullptr)
 		: QCheckBox(parent) { }
 
@@ -25,7 +35,7 @@ public:
 		setText(txt);
 	}
 protected:
-
 	virtual void enterEvent(QEnterEvent* ev) override;
-	virtual void leaveEvent(QEvent* ev) override;
 };
+
+#endif

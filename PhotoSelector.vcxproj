@@ -213,7 +213,7 @@
   <ItemGroup>
     <ClInclude Include="App\QDefinitions.h" />
     <ClInclude Include="Widgets\Viewport.h" />
-    <QtMoc Include="Widgets\ImageCheckBox.h" />
+    <ClInclude Include="Widgets\ImageCheckBox.h" />
     <ClInclude Include="App\LoadDirectory.h" />
     <ClInclude Include="Widgets\Folder.h" />
     <ClInclude Include="Widgets\Selector.h" />
