@@ -1,10 +1,10 @@
 #ifndef IMAGEVIEWER_H
 #define IMAGEVIEWER_H
 
-#include "Viewport.h"
-#include "ImageLoader.h"
-#include "Folder.h"
-#include "Selector.h"
+#include "Widgets/Viewport.h"
+#include "Image/ImageLoader.h"
+#include "Widgets/Folder.h"
+#include "Widgets/Selector.h"
 
 #include <QMainWindow>
 #if defined(QT_PRINTSUPPORT_LIB)
@@ -28,7 +28,6 @@ namespace Photo
 {
 	class PhotoSelector : public QMainWindow
 	{
-		Q_OBJECT
 
 	public:
 		PhotoSelector(QWidget* parent = nullptr);

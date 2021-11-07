@@ -1,8 +1,8 @@
-#include "Selector.h"
-#include "QDefinitions.h"
-#include "Service.h"
-#include "PhotoSelector.h"
-#include "ImageCheckBox.h"
+#include "Widgets/Selector.h"
+#include "App/QDefinitions.h"
+#include "Widgets/Service.h"
+#include "App/PhotoSelector.h"
+#include "Widgets/ImageCheckBox.h"
 
 namespace Photo
 {

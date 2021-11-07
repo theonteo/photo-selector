@@ -1,6 +1,6 @@
 #include "ImageCheckBox.h"
-#include "PhotoSelector.h"
-#include "Service.h"
+#include "App/PhotoSelector.h"
+#include "Widgets/Service.h"
 
 void ImageCheckBox::enterEvent(QEnterEvent* ev)
 {

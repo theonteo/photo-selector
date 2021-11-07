@@ -2,7 +2,7 @@
 #include <QWidget>
 #include <map>
 #include <vector>
-#include "ImageCheckBox.h"
+#include "Widgets/ImageCheckBox.h"
 
 QT_BEGIN_NAMESPACE
 class QVBoxLayout;

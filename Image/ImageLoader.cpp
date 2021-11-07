@@ -1,7 +1,7 @@
-#include "ImageLoader.h"
+#include "Image/ImageLoader.h"
 
-#include "QDefinitions.h"
-#include "PhotoSelector.h"
+#include "App/QDefinitions.h"
+#include "App/PhotoSelector.h"
 
 namespace Photo
 {

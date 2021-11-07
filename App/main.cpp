@@ -2,8 +2,8 @@
 #include <QApplication>
 #include <QCommandLineParser>
 
-#include "PhotoSelector.h"
-#include "Service.h"
+#include "App/PhotoSelector.h"
+#include "Widgets/Service.h"
 
 int main(int argc, char *argv[])
 {

@@ -47,42 +47,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageLoader.cpp">
-      <Filter>Source Files\Image</Filter>
-    </ClCompile>
-    <ClCompile Include="PhotoSelector.cpp">
+    <ClCompile Include="App\PhotoSelector.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
-    <ClCompile Include="Folder.cpp">
+    <ClCompile Include="Image\ImageLoader.cpp">
+      <Filter>Source Files\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\ImageCheckBox.cpp">
+      <Filter>Source Files\Widget\CheckBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\Folder.cpp">
       <Filter>Source Files\Widget\Folder</Filter>
     </ClCompile>
-    <ClCompile Include="Viewport.cpp">
-      <Filter>Source Files\Widget\Viewport</Filter>
+    <ClCompile Include="App\LoadDirectory.cpp">
+      <Filter>Source Files\Widget\Folder</Filter>
     </ClCompile>
-    <ClCompile Include="Selector.cpp">
+    <ClCompile Include="Widgets\Selector.cpp">
       <Filter>Source Files\Widget\Selector</Filter>
     </ClCompile>
-    <ClCompile Include="LoadDirectory.cpp">
-      <Filter>Source Files\Widget\Folder</Filter>
+    <ClCompile Include="Widgets\Viewport.cpp">
+      <Filter>Source Files\Widget\Viewport</Filter>
     </ClCompile>
-    <ClCompile Include="ImageCheckBox.cpp">
-      <Filter>Source Files\Widget\CheckBox</Filter>
+    <ClCompile Include="App\main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="PhotoSelector.h">
-      <Filter>Source Files\App</Filter>
-    </QtMoc>
-    <QtMoc Include="ImageLoader.h">
-      <Filter>Source Files\Image</Filter>
-    </QtMoc>
-    <QtMoc Include="Viewport.h">
-      <Filter>Source Files\Widget\Viewport</Filter>
-    </QtMoc>
-    <QtMoc Include="ImageCheckBox.h">
+    <QtMoc Include="Widgets\ImageCheckBox.h">
       <Filter>Source Files\Widget\CheckBox</Filter>
     </QtMoc>
   </ItemGroup>
@@ -95,20 +86,29 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="QDefinitions.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Image\ImageLoader.h">
+      <Filter>Source Files\Image</Filter>
     </ClInclude>
-    <ClInclude Include="Folder.h">
+    <ClInclude Include="Widgets\Service.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\Folder.h">
       <Filter>Source Files\Widget\Folder</Filter>
     </ClInclude>
-    <ClInclude Include="Selector.h">
+    <ClInclude Include="App\LoadDirectory.h">
+      <Filter>Source Files\Widget\Folder</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\Selector.h">
       <Filter>Source Files\Widget\Selector</Filter>
     </ClInclude>
-    <ClInclude Include="LoadDirectory.h">
-      <Filter>Source Files\Widget\Folder</Filter>
+    <ClInclude Include="Widgets\Viewport.h">
+      <Filter>Source Files\Widget\Viewport</Filter>
     </ClInclude>
-    <ClInclude Include="Service.h">
-      <Filter>Source Files\Utilities</Filter>
+    <ClInclude Include="App\QDefinitions.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="App\PhotoSelector.h">
+      <Filter>Source Files\App</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

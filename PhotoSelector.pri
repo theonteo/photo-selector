@@ -4,23 +4,23 @@
 
 # This is a reminder that you are using a generated .pro file.
 # Remove it when you are finished editing this file.
+message("You are running qmake on a generated .pro file. This may not work!")
 
-HEADERS += ./Viewport.h \
-    ./PhotoSelector.h \
-    ./Utilities.h \
-    ./ImageLoader.h \
-    ./QDefinitions.h \
-    ./Folder.h \
-    ./Selector.h \
-    ./LoadDirectory.h \
-    ./Service.h \
-    ./ImageCheckBox.h
-SOURCES += ./Viewport.cpp \
-    ./PhotoSelector.cpp \
-    ./main.cpp \
-    ./Utilities.cpp \
-    ./ImageLoader.cpp \
-    ./Folder.cpp \
-    ./Selector.cpp \
-    ./LoadDirectory.cpp \
-    ./ImageCheckBox.cpp
+
+HEADERS += ./App/QDefinitions.h \
+    ./Widgets/Service.h \
+    ./Image/ImageLoader.h \
+    ./App/PhotoSelector.h \
+    ./Widgets/Viewport.h \
+    ./App/LoadDirectory.h \
+    ./Widgets/Folder.h \
+    ./Widgets/Selector.h \
+    ./Widgets/ImageCheckBox.h
+SOURCES += ./App/main.cpp \
+    ./Image/ImageLoader.cpp \
+    ./App/PhotoSelector.cpp \
+    ./Widgets/Viewport.cpp \
+    ./App/LoadDirectory.cpp \
+    ./Widgets/Folder.cpp \
+    ./Widgets/Selector.cpp \
+    ./Widgets/ImageCheckBox.cpp

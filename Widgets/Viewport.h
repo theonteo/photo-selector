@@ -18,7 +18,6 @@ namespace Photo
 {
   class Viewport :public QObject
   {
-    Q_OBJECT
   private:
 
     QImage image;

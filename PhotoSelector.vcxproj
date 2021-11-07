@@ -183,18 +183,14 @@
     </QtMoc>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ImageCheckBox.cpp" />
-    <ClCompile Include="Folder.cpp" />
-    <ClCompile Include="ImageLoader.cpp" />
-    <ClCompile Include="LoadDirectory.cpp" />
-    <ClCompile Include="PhotoSelector.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Selector.cpp" />
-    <ClCompile Include="Viewport.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="PhotoSelector.h">
-    </QtMoc>
+    <ClCompile Include="App\LoadDirectory.cpp" />
+    <ClCompile Include="App\main.cpp" />
+    <ClCompile Include="App\PhotoSelector.cpp" />
+    <ClCompile Include="Image\ImageLoader.cpp" />
+    <ClCompile Include="Widgets\Folder.cpp" />
+    <ClCompile Include="Widgets\ImageCheckBox.cpp" />
+    <ClCompile Include="Widgets\Selector.cpp" />
+    <ClCompile Include="Widgets\Viewport.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -215,16 +211,15 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Viewport.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="ImageCheckBox.h" />
-    <ClInclude Include="Folder.h" />
-    <ClInclude Include="LoadDirectory.h" />
-    <ClInclude Include="Selector.h" />
-    <ClInclude Include="Service.h" />
-    <QtMoc Include="ImageLoader.h" />
-    <ClInclude Include="QDefinitions.h" />
+    <ClInclude Include="App\QDefinitions.h" />
+    <ClInclude Include="Widgets\Viewport.h" />
+    <QtMoc Include="Widgets\ImageCheckBox.h" />
+    <ClInclude Include="App\LoadDirectory.h" />
+    <ClInclude Include="Widgets\Folder.h" />
+    <ClInclude Include="Widgets\Selector.h" />
+    <ClInclude Include="Widgets\Service.h" />
+    <ClInclude Include="App\PhotoSelector.h" />
+    <ClInclude Include="Image\ImageLoader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -1,9 +1,9 @@
 
-#include "PhotoSelector.h"
+#include "App/PhotoSelector.h"
 
-#include "QDefinitions.h"
+#include "App/QDefinitions.h"
 
-#include <Viewport.h>
+#include <Widgets/Viewport.h>
 
 
 #if defined(QT_PRINTSUPPORT_LIB)

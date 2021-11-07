@@ -1,9 +1,9 @@
-#include "Folder.h"
+#include "Widgets/Folder.h"
 
-#include "QDefinitions.h"
-#include "PhotoSelector.h"
-#include "Service.h"
-#include "Selector.h"
+#include "App/QDefinitions.h"
+#include "App/PhotoSelector.h"
+#include "Widgets/Service.h"
+#include "Widgets/Selector.h"
 #include <iostream>
 
 namespace Photo
