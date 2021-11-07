@@ -26,7 +26,7 @@ namespace PhotoSelector
 	Selector::Selector(){}
 	/**************************************************************************/
 	/*
-		 \brief
+		 \brief generate checkbox widgets
 	*/
 	/**************************************************************************/
 	void Selector::GenerateFileCheckbox()
@@ -46,36 +46,28 @@ namespace PhotoSelector
 			for (size_t i = 0; i < directories.size(); ++i)
 			{
 				std::unique_ptr< ImageCheckBox> checkBox =
-					std::make_unique< ImageCheckBox>(tr(directories[i].toStdString().c_str()));
-				//	std::make_unique<QCheckBox>(tr(directories[i].toStdString().c_str()));
-					//connect hover
-				/*	QObject::connect(&*checkBox, SIGNAL(clicked()), this, SLOT(SizeCHange()));*/
+					std::make_unique< ImageCheckBox>
+					(tr(directories[i].toStdString().c_str()));
 
 				box->addWidget(&*checkBox);
 				checkBoxes.insert({ directories[i], std::move(checkBox) });
-
-
 			}
 		}
 	}
 	/**************************************************************************/
 	/*
-		 \brief
+		 \brief get paths which are selected by user
 	*/
 	/**************************************************************************/
 	void Selector::GetSelectedCheckboxes()
 	{
 		for (const auto& [fileName, checkbox] : checkBoxes)
-		{
 			if (checkbox->isChecked())
-			{
 				selectedImagesPath.push_back(fileName);
-			}
-		}
 	}
 	/**************************************************************************/
 	/*
-		 \brief
+		 \brief generate selector widgets
 	*/
 	/**************************************************************************/
 	void Selector::GenerateWidgets()
@@ -85,18 +77,18 @@ namespace PhotoSelector
 		groupBox = std::make_unique < QGroupBox>(tr("Image Selector"));
 
 		scrollArea = std::make_unique < QScrollArea>();
-		scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
+		scrollArea->setVerticalScrollBarPolicy
+		(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
 		scrollArea->setWidgetResizable(true);
 		GenerateFileCheckbox();
 
 		box->addStretch(0);
 		widget->setLayout(&*box);
 		scrollArea->setWidget(&*widget);
-
 	}
 	/**************************************************************************/
 	/*
-		 \brief
+		 \brief return group box
 	*/
 	/**************************************************************************/
 	const std::unique_ptr < QGroupBox>& Selector::GetGroupBox() const
@@ -105,7 +97,7 @@ namespace PhotoSelector
 	}
 	/**************************************************************************/
 	/*
-		 \brief
+		 \brief return scroll area
 	*/
 	/**************************************************************************/
 	const std::unique_ptr < QScrollArea>& Selector::GetScrollArea() const
@@ -114,7 +106,7 @@ namespace PhotoSelector
 	}
 	/**************************************************************************/
 	/*
-		 \brief
+		 \brief return all image paths
 	*/
 	/**************************************************************************/
 	const std::vector<QString>& Selector::GetImagesPath() const

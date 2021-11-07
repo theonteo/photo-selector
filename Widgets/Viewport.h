@@ -15,6 +15,7 @@ This project contains simple qt application
 
 #include <QImage>
 #include <QObject>
+
 QT_BEGIN_NAMESPACE
 class QAction;
 class QLabel;
@@ -32,19 +33,20 @@ namespace PhotoSelector
 	class Viewport :public QObject
 	{
 	private:
-
+		//main image
 		QImage image;
 
-		std::unique_ptr<QLabel> imageLabel{ nullptr };
-		std::unique_ptr < QScrollArea> scrollArea{ nullptr };
+		std::unique_ptr <QLabel> imageLabel{ nullptr };
+		std::unique_ptr <QScrollArea> scrollArea{ nullptr };
+		std::unique_ptr <QWidget> widget{ nullptr };
+
+		QAction* zoomInAct{ nullptr };
+		QAction* zoomOutAct{ nullptr };
+		QAction* normalSizeAct{ nullptr };
+		QAction* fitToWindowAct{ nullptr };
+
+		//image scale value
 		double scaleFactor{ 1 };
-
-		std::unique_ptr < QWidget> widget{ nullptr };
-
-		 QAction* zoomInAct{ nullptr };
-		 QAction* zoomOutAct{ nullptr };
-		 QAction* normalSizeAct{ nullptr };
-		 QAction* fitToWindowAct{ nullptr };
 
 	public:
 		Viewport();
@@ -65,17 +67,16 @@ namespace PhotoSelector
 		const std::unique_ptr <QWidget>& GetViewportWidget() const;
 		const std::unique_ptr <QScrollArea>& GetScrollArea() const;
 
-
 		//scaling functions
 		void scaleImage(double factor);
+
 	private slots:
 		void zoomIn();
 		void zoomOut();
 		void normalSize();
 		void fitToWindow();
-
+	private:
 		void AddActions(QMenu* menu);
-
 	};
 }
 

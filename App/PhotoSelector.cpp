@@ -120,9 +120,7 @@ namespace PhotoSelector
 	/**************************************************************************/
 	void PhotoSelector::open(const QString& str)
 	{
-		const auto& openStr = 
-			loader.loadFile(str, viewport.GetImage());
-
+		loader.loadFile(str, viewport.GetImage());
 		viewport.setImage(viewport.GetImage());
 		updateActions();
 
@@ -258,7 +256,7 @@ namespace PhotoSelector
 		(tr("&Paste"), this, &PhotoSelector::paste);
 		pasteAct->setShortcut(QKeySequence::Paste);
 
-		QMenu* viewMenu = menuBar()->addMenu(tr("&View"));
+		menuBar()->addMenu(tr("&View"));
 		QMenu* helpMenu = menuBar()->addMenu(tr("&Help"));
 
 		helpMenu->addAction(tr("About "), this, &QApplication::aboutQt);

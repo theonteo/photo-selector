@@ -26,6 +26,7 @@ This project contains simple qt application
 #include <QPainter>
 #include <QScreen>
 #include <QStandardPaths>
+#include <QScrollBar>
 #include <QStatusBar>
 #include <QtWidgets/QStackedWidget>
 #include <QGroupBox>
