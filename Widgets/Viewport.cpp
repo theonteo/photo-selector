@@ -10,8 +10,8 @@ namespace Photo
 {
 	Viewport::Viewport()
 	{
-		imageLabel = new QLabel;
-		scrollArea = new QScrollArea(imageLabel);
+		imageLabel = std::make_unique< QLabel>();
+		scrollArea = std::make_unique< QScrollArea>(&*imageLabel);
 	}
 
 	void Viewport::adjustScrollBar(QScrollBar* scrollBar, double factor)
@@ -23,20 +23,20 @@ namespace Photo
 	void Viewport::CreateViewportWidget()
 	{
 		scrollArea->setBackgroundRole(QPalette::Base);
-		scrollArea->setWidget(imageLabel);
+		scrollArea->setWidget(&*imageLabel);
 		scrollArea->setVisible(true);
 
 
 	}
-	QWidget* Viewport::GetViewportWidget() const
+	const std::unique_ptr<QWidget>& Viewport::GetViewportWidget() const
 	{
 		return widget;
 	}
-	QWidget* Viewport::GetScrollArea() const
+	const std::unique_ptr<QScrollArea>& Viewport::GetScrollArea() const
 	{
 		return scrollArea;
 	}
-	const QLabel* Viewport::GetImageLabel() const
+	const std::unique_ptr<QLabel>& Viewport::GetImageLabel() const
 	{
 		return imageLabel;
 	}

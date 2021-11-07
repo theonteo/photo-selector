@@ -16,56 +16,53 @@ QT_END_NAMESPACE
 
 namespace Photo
 {
-  class Viewport :public QObject
-  {
-  private:
+	class Viewport :public QObject
+	{
+	private:
 
-    QImage image;
-    QLabel* imageLabel{ nullptr };
-    QScrollArea* scrollArea{ nullptr };
-    double scaleFactor = 1;
+		QImage image;
 
-    QWidget* widget{ nullptr };
+		std::unique_ptr<QLabel> imageLabel{ nullptr };
+		std::unique_ptr < QScrollArea> scrollArea{ nullptr };
+		double scaleFactor{ 1 };
 
-    QAction* zoomInAct;
-    QAction* zoomOutAct;
-    QAction* normalSizeAct;
-    QAction* fitToWindowAct;
+		std::unique_ptr < QWidget> widget{ nullptr };
 
-  public:
-    Viewport();
+		 QAction* zoomInAct{ nullptr };
+		 QAction* zoomOutAct{ nullptr };
+		 QAction* normalSizeAct{ nullptr };
+		 QAction* fitToWindowAct{ nullptr };
 
-    void CreateViewportWidget();
+	public:
+		Viewport();
 
-    //get reference of image label
-    const QLabel* GetImageLabel() const;
+		void CreateViewportWidget();
 
-    //get reference of image
-    const QImage& GetImage() const;
-    QImage& GetImage();
+		//get reference of image label
+		const  std::unique_ptr < QLabel>& GetImageLabel() const;
 
-    //image functions
-    void setImage(const QImage& newImage);
-    void adjustScrollBar(QScrollBar* scrollBar, double factor);
+		//get reference of image
+		const QImage& GetImage() const;
+		QImage& GetImage();
 
-    QWidget* GetViewportWidget() const;
-    QWidget* GetScrollArea() const;
+		//image functions
+		void setImage(const QImage& newImage);
+		void adjustScrollBar(QScrollBar* scrollBar, double factor);
 
-
-    //scaling functions
-    void scaleImage(double factor);
-  private slots:
-    void zoomIn();
-    void zoomOut();
-    void normalSize();
-    void fitToWindow();
-
-    void AddActions(QMenu* menu);
+		const std::unique_ptr <QWidget>& GetViewportWidget() const;
+		const std::unique_ptr <QScrollArea>& GetScrollArea() const;
 
 
+		//scaling functions
+		void scaleImage(double factor);
+	private slots:
+		void zoomIn();
+		void zoomOut();
+		void normalSize();
+		void fitToWindow();
 
+		void AddActions(QMenu* menu);
 
-
-  };
+	};
 
 }

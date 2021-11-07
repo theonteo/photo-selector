@@ -66,7 +66,7 @@ namespace Photo
 
 		grid->addWidget(&*AddFolderButtons(), 0, 0, 1, 1);
 		grid->addWidget(&*AddImageSelector(), 0, 1, 2, 1);
-		grid->addWidget(viewport.GetScrollArea(), 1, 0, 1, 1);
+		grid->addWidget(&*viewport.GetScrollArea(), 1, 0, 1, 1);
 
 		viewport.CreateViewportWidget();
 	}
