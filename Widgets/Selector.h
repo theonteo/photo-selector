@@ -16,19 +16,19 @@ namespace Photo
 {
 	class Selector final : public QWidget
 	{
-		QVBoxLayout* box{ nullptr };
-		QGroupBox* groupBox{ nullptr };
-		QScrollArea* scrollArea{ nullptr };
-		QWidget* widget{ nullptr };
+		std::unique_ptr <QVBoxLayout> box{ nullptr };
+		std::unique_ptr <QGroupBox> groupBox{ nullptr };
+		std::unique_ptr <QScrollArea> scrollArea{ nullptr };
+		std::unique_ptr <QWidget> widget{ nullptr };
 
 	public:
 		Selector();
 
-		std::map<QString,std::unique_ptr<ImageCheckBox>> checkBoxes;
+		std::map<QString, std::unique_ptr<ImageCheckBox>> checkBoxes;
 		std::vector<QString> selectedImagesPath;
 
-		QGroupBox* GetGroupBox() const;
-		QScrollArea* GetScrollArea() const;
+		const std::unique_ptr < QGroupBox>& GetGroupBox() const;
+		const std::unique_ptr < QScrollArea>& GetScrollArea() const;
 
 		const std::vector<QString>& GetImagesPath() const;
 

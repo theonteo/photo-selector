@@ -13,16 +13,16 @@ namespace Photo
 	class Folder final : public QWidget
 	{
 
-		QVBoxLayout* box{ nullptr };
-		QGroupBox* groupBox{ nullptr };
+		std::unique_ptr<QVBoxLayout> box{ nullptr };
+		std::unique_ptr < QGroupBox> groupBox{ nullptr };
 
 		//store inpout/output paths
 		QString inputPath;
 		QString outputPath;
 
 		//folder labels
-		QLabel* labelInput{ nullptr };
-		QLabel* labelOutput{ nullptr };
+		std::unique_ptr < QLabel> labelInput{ nullptr };
+		std::unique_ptr < QLabel> labelOutput{ nullptr };
 
 		//load directory class
 		LoadDirectory directory;
@@ -44,7 +44,7 @@ namespace Photo
 
 		const LoadDirectory& GetDirectory() const;
 
-		QGroupBox* GetGroupBox() const;
+		const std::unique_ptr <QGroupBox>& GetGroupBox() const;
 
 		void GenerateWidgets();
 	};

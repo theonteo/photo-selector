@@ -28,7 +28,6 @@ namespace Photo
 {
 	class PhotoSelector : public QMainWindow
 	{
-
 	public:
 		PhotoSelector(QWidget* parent = nullptr);
 
@@ -38,7 +37,6 @@ namespace Photo
 		void print();
 		void copy();
 		void paste();
-		void about();
 
 	private:
 
@@ -53,11 +51,11 @@ namespace Photo
 		void updateActions();
 
 		//folder buttons
-		QGroupBox* AddFolderButtons();
-		QScrollArea* AddImageSelector();
-		QWidget* centralWidget;
+		const std::unique_ptr<QGroupBox>& AddFolderButtons();
+		const std::unique_ptr < QScrollArea>& AddImageSelector();
+		std::unique_ptr < QWidget> centralWidget;
 
-		void AddAllWidgets(QMainWindow* window);
+		void AddAllWidgets();
 
 
 #if defined(QT_PRINTSUPPORT_LIB) && QT_CONFIG(printer)

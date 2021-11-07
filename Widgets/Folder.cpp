@@ -8,15 +8,15 @@
 
 namespace Photo
 {
-	QGroupBox* Folder::GetGroupBox() const
+	const std::unique_ptr <QGroupBox>& Folder::GetGroupBox() const
 	{
 		return groupBox;
 	}
 	void Folder::GenerateWidgets()
 	{
-		box = new QVBoxLayout;
+		box = std::make_unique< QVBoxLayout>();
 
-		groupBox = new QGroupBox(PhotoSelector::tr("Folder Selection"));
+		groupBox = std::make_unique < QGroupBox>(PhotoSelector::tr("Folder Selection"));
 		groupBox->setFlat(true);
 
 		//QCheckBox* checkBox1 = new QCheckBox(PhotoSelector::tr("&Checkbox 1"));
@@ -28,12 +28,12 @@ namespace Photo
 		tristateBox->setCheckState(Qt::PartiallyChecked);*/
 
 		//QLineEdit* inputFolder = new QLineEdit(PhotoSelector::tr("&Input Folder"));
-		labelInput = new QLabel;
+		labelInput = std::make_unique < QLabel>();
 		labelInput->setText("Input Folder: None");
 
 		QPushButton* inputButton = new QPushButton(PhotoSelector::tr("&Input Folder"));
 		inputButton->setFixedSize(100, 25);
-		labelOutput = new QLabel;
+		labelOutput = std::make_unique < QLabel>();
 		labelOutput->setText("Output Folder: None");
 		QPushButton* outputButton = new QPushButton(PhotoSelector::tr("&Output Folder"));
 		outputButton->setFixedSize(100, 25);
@@ -45,15 +45,15 @@ namespace Photo
 	/*	box->addWidget(checkBox1);
 		box->addWidget(checkBox2);
 		box->addWidget(tristateBox);*/
-		box->addWidget(labelInput);
+		box->addWidget(&*labelInput);
 		box->addWidget(inputButton);
 
-		box->addWidget(labelOutput);
+		box->addWidget(&*labelOutput);
 		box->addWidget(outputButton);
 
 		box->addWidget(exportButton);
 
-		groupBox->setLayout(box);
+		groupBox->setLayout(&*box);
 
 		//connect buttons to folder functions
 		connect(inputButton, &QPushButton::clicked, this, &Folder::SetInputFolderPath);

@@ -1,10 +1,8 @@
 
 #include "App/PhotoSelector.h"
-
 #include "App/QDefinitions.h"
 
 #include <Widgets/Viewport.h>
-
 
 #if defined(QT_PRINTSUPPORT_LIB)
 #  include <QtPrintSupport/qtprintsupportglobal.h>
@@ -18,8 +16,8 @@ namespace Photo
 	PhotoSelector::PhotoSelector(QWidget* parent)
 		: QMainWindow(parent)
 	{
-		AddAllWidgets(this);
-		setCentralWidget(centralWidget);
+		AddAllWidgets();
+		setCentralWidget(&*centralWidget);
 
 		createActions();
 
@@ -27,7 +25,8 @@ namespace Photo
 	}
 
 
-	static void initializeImageFileDialog(QFileDialog& dialog, QFileDialog::AcceptMode acceptMode)
+	static void initializeImageFileDialog
+	(QFileDialog& dialog, QFileDialog::AcceptMode acceptMode)
 	{
 		static bool firstDialog = true;
 
@@ -49,24 +48,24 @@ namespace Photo
 		if (acceptMode == QFileDialog::AcceptSave)
 			dialog.setDefaultSuffix("jpg");
 	}
-	QGroupBox* PhotoSelector::AddFolderButtons()
+	const std::unique_ptr<QGroupBox>& PhotoSelector::AddFolderButtons()
 	{
 		folder.GenerateWidgets();
 		return folder.GetGroupBox();
 	}
-	QScrollArea* PhotoSelector::AddImageSelector()
+	const std::unique_ptr < QScrollArea>& PhotoSelector::AddImageSelector()
 	{
 		 selector.GenerateWidgets();
 		 return selector.GetScrollArea();
 	}
-	void PhotoSelector::AddAllWidgets(QMainWindow* window)
+	void PhotoSelector::AddAllWidgets()
 	{
-		centralWidget = new QWidget(window);
+		centralWidget = std::make_unique< QWidget>(this);
 		centralWidget->setObjectName(QString::fromUtf8("centralwidget"));
-		QGridLayout* grid = new QGridLayout(centralWidget);
+		QGridLayout* grid = new QGridLayout(&*centralWidget);
 
-		grid->addWidget(AddFolderButtons(), 0, 0, 1, 1);
-		grid->addWidget(AddImageSelector(), 0, 1, 2, 1);
+		grid->addWidget(&*AddFolderButtons(), 0, 0, 1, 1);
+		grid->addWidget(&*AddImageSelector(), 0, 1, 2, 1);
 		grid->addWidget(viewport.GetScrollArea(), 1, 0, 1, 1);
 
 		viewport.CreateViewportWidget();
@@ -89,30 +88,22 @@ namespace Photo
 	}
 	void PhotoSelector::open(const QString& str)
 	{
-
-		
-
-
-		//QFileDialog dialog(this, tr("Open File"));
-	//	initializeImageFileDialog(dialog, QFileDialog::AcceptOpen);
 		const auto& openStr = 
-			//	while (
 			loader.loadFile(str, viewport.GetImage());
-		//while (dialog.exec() == QDialog::Accepted &&
-			//!loader.loadFile(dialog.selectedFiles().constFirst(), viewport.GetImage())) {}
 
 		viewport.setImage(viewport.GetImage());
 		updateActions();
 
-		//setWindowFilePath(fileName);
 	}
 
 	void PhotoSelector::saveAs()
 	{
 		QFileDialog dialog(this, tr("Save File As"));
-		initializeImageFileDialog(dialog, QFileDialog::AcceptSave);
+		initializeImageFileDialog
+		(dialog, QFileDialog::AcceptSave);
 
-		while (dialog.exec() == QDialog::Accepted && !loader.saveFile(dialog.selectedFiles().constFirst(), viewport.GetImage())) {}
+		while (dialog.exec() == QDialog::Accepted && !loader.saveFile
+		(dialog.selectedFiles().constFirst(), viewport.GetImage())) {}
 	}
 
 	void PhotoSelector::print()
@@ -182,16 +173,9 @@ namespace Photo
 	}
 
 
-	void PhotoSelector::about()
-	{
-	}
-
 	void PhotoSelector::createActions()
 	{
 		QMenu* fileMenu = menuBar()->addMenu(tr("&File"));
-
-		//QAction* openAct = fileMenu->addAction(tr("&Open..."), this, &PhotoSelector::open);
-		//openAct->setShortcut(QKeySequence::Open);
 
 		saveAsAct = fileMenu->addAction(tr("&Save As..."), this, &PhotoSelector::saveAs);
 		saveAsAct->setEnabled(false);
@@ -219,8 +203,7 @@ namespace Photo
 
 		QMenu* helpMenu = menuBar()->addMenu(tr("&Help"));
 
-		helpMenu->addAction(tr("&About"), this, &PhotoSelector::about);
-		helpMenu->addAction(tr("About &Qt"), this, &QApplication::aboutQt);
+		helpMenu->addAction(tr("About "), this, &QApplication::aboutQt);
 	}
 
 	void PhotoSelector::updateActions()
