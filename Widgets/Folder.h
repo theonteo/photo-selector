@@ -48,6 +48,10 @@ namespace PhotoSelector
 		//export selected images
 		void ExportImages();
 
+		//export txt file
+		void ExportTxtFile();
+
+
 	public:
 		//return read string
 		const QString& GetInputPath() const;

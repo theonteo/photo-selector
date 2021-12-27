@@ -15,6 +15,7 @@ This project contains simple qt application
 #include "App/PhotoSelector.h"
 #include "Widgets/Service.h"
 #include "Widgets/Selector.h"
+#include <fstream>
 #include <iostream>
 
 namespace PhotoSelector
@@ -34,25 +35,30 @@ namespace PhotoSelector
 		labelInput = std::make_unique < QLabel>();
 		labelInput->setText("Input Folder: None");
 
-		QPushButton* inputButton = 
+		QPushButton* inputButton =
 			new QPushButton(PhotoSelector::tr("&Input Folder"));
 
 		inputButton->setFixedSize(100, 25);
 		labelOutput = std::make_unique < QLabel>();
 		labelOutput->setText("Output Folder: None");
 
-		QPushButton* outputButton = 
+		QPushButton* outputButton =
 			new QPushButton(PhotoSelector::tr("&Output Folder"));
 		outputButton->setFixedSize(100, 25);
 
 		QPushButton* exportButton =
 			new QPushButton(PhotoSelector::tr("&Export Selected Images"));
 
+		QPushButton* exportTxtButton =
+			new QPushButton(PhotoSelector::tr("&Export Image Txt file"));
+
+
 		box->addWidget(&*labelInput);
 		box->addWidget(inputButton);
 		box->addWidget(&*labelOutput);
 		box->addWidget(outputButton);
 		box->addWidget(exportButton);
+		box->addWidget(exportTxtButton);
 
 		groupBox->setLayout(&*box);
 
@@ -63,6 +69,8 @@ namespace PhotoSelector
 			this, &Folder::SetOutputFolderPath);
 		connect(exportButton, &QPushButton::clicked,
 			this, &Folder::ExportImages);
+		connect(exportTxtButton, &QPushButton::clicked,
+			this, &Folder::ExportTxtFile);
 	}
 	/**************************************************************************/
 	/*
@@ -85,6 +93,8 @@ namespace PhotoSelector
 		auto& selector = Data::Service<PhotoSelector>::Get().GetSelector();
 		selector.GenerateFileCheckbox();
 
+		auto& viewport = Data::Service<PhotoSelector>::Get().GetViewport();
+		viewport.deleteImage();
 	}
 	/**************************************************************************/
 	/*
@@ -131,6 +141,22 @@ namespace PhotoSelector
 			std::cout << e.what() << std::endl;
 		}
 	}
+	void Folder::ExportTxtFile()
+	{
+		if (outputPath.isEmpty())return;
+
+		// output file
+		std::ofstream out((outputPath + "/" ).toStdString() + "Export.txt");
+		// to create a file for input: ifstream in("input.txt");
+		auto& selector =
+			Data::Service<PhotoSelector>::Get().GetSelector();
+
+		selector.GetSelectedCheckboxes();
+
+		// Use ofstream like cout
+		for (const auto& i : selector.GetImagesPath())
+			out << i.toStdString()<<"\n";
+	}
 	/**************************************************************************/
 	/*
 		 \brief return group box
@@ -142,7 +168,7 @@ namespace PhotoSelector
 	}
 	/**************************************************************************/
 	/*
-		 \brief return input path 
+		 \brief return input path
 	*/
 	/**************************************************************************/
 	const QString& Folder::GetInputPath() const

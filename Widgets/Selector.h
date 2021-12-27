@@ -46,7 +46,6 @@ namespace PhotoSelector
 		const std::unique_ptr < QGroupBox>& GetGroupBox() const;
 		const std::unique_ptr < QScrollArea>& GetScrollArea() const;
 		const std::vector<QString>& GetImagesPath() const;
-
 		void GenerateFileCheckbox();
 		void GetSelectedCheckboxes();
 		void GenerateWidgets();

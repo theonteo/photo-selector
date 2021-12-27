@@ -108,6 +108,10 @@ namespace PhotoSelector
 		imageLabel->adjustSize();
 		zoomOut();
 	}
+	void Viewport::deleteImage()
+	{
+		imageLabel->clear();
+	}
 	/**************************************************************************/
 	/*
 		 \brief image zoom in

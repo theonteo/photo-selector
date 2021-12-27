@@ -32,10 +32,8 @@ namespace PhotoSelector
 	void Selector::GenerateFileCheckbox()
 	{
 		//remove all checkboxes
-		for (auto& i : checkBoxes)
-			box->removeWidget(&*i.second);
-
-		checkBoxes.clear();
+		for (auto& i : checkBoxes)		
+			i.second->hide();
 
 		if (Data::Service<PhotoSelector>::Exist())
 		{
@@ -53,6 +51,7 @@ namespace PhotoSelector
 				checkBoxes.insert({ directories[i], std::move(checkBox) });
 			}
 		}
+
 	}
 	/**************************************************************************/
 	/*

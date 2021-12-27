@@ -309,4 +309,12 @@ namespace PhotoSelector
 	{
 		return selector;
 	}
+	const Viewport& PhotoSelector::GetViewport() const
+	{
+		return viewport;
+	}
+	Viewport& PhotoSelector::GetViewport()
+	{
+		return viewport;
+	}
 }

@@ -86,6 +86,9 @@ namespace PhotoSelector
 
 		const Selector& GetSelector() const;
 		Selector& GetSelector();
+
+		const Viewport& GetViewport() const;
+		Viewport& GetViewport();
 	};
 }
 

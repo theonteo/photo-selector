@@ -62,6 +62,7 @@ namespace PhotoSelector
 
 		//image functions
 		void setImage(const QImage& newImage);
+		void deleteImage();
 		void adjustScrollBar(QScrollBar* scrollBar, double factor);
 
 		const std::unique_ptr <QWidget>& GetViewportWidget() const;
