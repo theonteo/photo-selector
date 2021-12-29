@@ -43,15 +43,19 @@ namespace PhotoSelector
 			//get info from load directory
 			for (size_t i = 0; i < directories.size(); ++i)
 			{
-				std::unique_ptr< ImageCheckBox> checkBox =
-					std::make_unique< ImageCheckBox>
-					(tr(directories[i].toStdString().c_str()));
+				const auto& str = directories[i];
+				
+					std::unique_ptr< ImageCheckBox> checkBox =
+						std::make_unique< ImageCheckBox>
+						(tr(str.toStdString().c_str()));
 
-				box->addWidget(&*checkBox);
-				checkBoxes.insert({ directories[i], std::move(checkBox) });
+					box->addWidget(&*checkBox);
+					checkBoxes.insert({ directories[i], std::move(checkBox) });
+					checkboxSet.insert(str);
+					checkBoxes.find(str)->second->show();
+			
 			}
 		}
-
 	}
 	/**************************************************************************/
 	/*

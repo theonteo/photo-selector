@@ -159,23 +159,23 @@ namespace PhotoSelector
 		zoomInAct = menu->addAction
 		(tr("Zoom &In (25%)"), this, &Viewport::zoomIn);
 		zoomInAct->setShortcut(QKeySequence::ZoomIn);
-		zoomInAct->setEnabled(false);
+		zoomInAct->setEnabled(true);
 
 		zoomOutAct = menu->addAction
 		(tr("Zoom &Out (25%)"), this, &Viewport::zoomOut);
 		zoomOutAct->setShortcut(QKeySequence::ZoomOut);
-		zoomOutAct->setEnabled(false);
+		zoomOutAct->setEnabled(true);
 
 		normalSizeAct = menu->addAction
 		(tr("&Normal Size"), this, &Viewport::normalSize);
 		normalSizeAct->setShortcut(tr("Ctrl+S"));
-		normalSizeAct->setEnabled(false);
+		normalSizeAct->setEnabled(true);
 
 		menu->addSeparator();
 
 		fitToWindowAct = menu->addAction
 		(tr("&Fit to Window"), this, &Viewport::fitToWindow);
-		fitToWindowAct->setEnabled(false);
+		fitToWindowAct->setEnabled(true);
 		fitToWindowAct->setCheckable(true);
 		fitToWindowAct->setShortcut(tr("Ctrl+F"));
 	}

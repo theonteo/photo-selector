@@ -16,7 +16,7 @@ This project contains simple qt application
 #include <map>
 #include <vector>
 #include "Widgets/ImageCheckBox.h"
-
+#include <unordered_set>
 QT_BEGIN_NAMESPACE
 class QVBoxLayout;
 class QGroupBox;
@@ -34,6 +34,9 @@ namespace PhotoSelector
 		std::unique_ptr <QGroupBox> groupBox{ nullptr };
 		std::unique_ptr <QScrollArea> scrollArea{ nullptr };
 		std::unique_ptr <QWidget> widget{ nullptr };
+
+		std::unordered_set<QString> checkboxSet;
+
 
 	public:
 		Selector();

@@ -70,14 +70,14 @@ namespace PhotoSelector
 
 		//scaling functions
 		void scaleImage(double factor);
-
+		void AddActions(QMenu* menu);
 	private slots:
 		void zoomIn();
 		void zoomOut();
 		void normalSize();
 		void fitToWindow();
 	private:
-		void AddActions(QMenu* menu);
+
 	};
 }
 

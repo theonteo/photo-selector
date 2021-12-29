@@ -260,6 +260,7 @@ namespace PhotoSelector
 		QMenu* helpMenu = menuBar()->addMenu(tr("&Help"));
 
 		helpMenu->addAction(tr("About "), this, &QApplication::aboutQt);
+		viewport.AddActions(editMenu);
 	}
 	/**************************************************************************/
 	/*

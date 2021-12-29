@@ -26,7 +26,7 @@ namespace PhotoSelector
 	{
 		//currently only support jpg
 		std::string ext(".jpg");
-
+		directoryFileNames.clear();
 		const auto& str = directorypath.toStdString();
 		for (const auto& entry : std::filesystem::directory_iterator(str))
 		{
